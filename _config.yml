@@ -1,14 +1,14 @@
-title: Mozillo Blog
+title: "Mozillo Blog"
 description: "A blog about cognitive science, machine learning, and data science"
 author:
   name: "mozillo"
   email: "motwu412@gmail.com"
-  url: "http://mozillo.github.io/"
+  url: "https://mozillo.github.io/"
 
-baseurl: /
-
+baseurl: "/"
+encoding: "utf-8"
 source: .
-destination: ./docs
+destination: ./.site
 permalink: /:title
 paginate: 20
 paginate_path: /page/:num/
@@ -25,6 +25,12 @@ plugins:
   - jekyll-seo-tag
   - jekyll-paginate
   - jekyll-sitemap
+  - jekyll-sass-converter
+sass:
+  style: compressed # 缩放样式，默认展开式，可选值：compressed 或 expanded
+  sass_dir: _sass # Sass源文件目录，默认是_sass
+  load_paths: ["#{site.source}/assets"] # 额外的Sass查找路径
+  verbose: true # 是否显示全部的Deprecation Warnings，默认false
 
 # Custom variables
 owner: "mozillo"
