@@ -4,8 +4,6 @@ published: true
 mathjax: true
 ---
 
-<iframe src="https://github.com/sponsors/pabloinsente/card" title="Sponsor pabloinsente" height="225" width="600" style="border: 0;"></iframe>
-
 **TL;DR** sections:
 
 [What is the UNIX shel](#what-is-the-unix-shell)
@@ -24,7 +22,7 @@ The rest of the content is really useful, but not strictly required to use the s
 
 1. downloading and installing terminal emulators like [GitBash](https://gitforwindows.org/) and [Cygwin](https://www.cygwin.com/)
 2. to install the [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
-3. open the GitHub repository associated with this tutorial in the cloud environment provided by **MyBinder** by clicking the icon below. Once the environment is ready (it may take a couple of minutes to build), open a terminal there. To open a terminal simply go to "File -> New -> Terminal" or click on the "Terminal" icon under the "Other" section in the landing page. The file with this tutorial is in  `unix-shell/` directory named as **unix_shell.md**
+3. open the GitHub repository associated with this tutorial in the cloud environment provided by **MyBinder** by clicking the icon below. Once the environment is ready (it may take a couple of minutes to build), open a terminal there. To open a terminal simply go to "File -> New -> Terminal" or click on the "Terminal" icon under the "Other" section in the landing page. The file with this tutorial is in `unix-shell/` directory named as **unix_shell.md**
 
 **To open MyBinder** -> [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/pabloinsente/intro-sc-python/master/?urlpath=lab)
 
@@ -47,21 +45,21 @@ If you are a beginner, [GitBash](https://gitforwindows.org/) and [Cygwin](https:
 
 ## What is the UNIX shell
 
-We begin our journey with the UNIX shell, that cryptic program that runs in your terminal enabling you to do all sort of tasks in your computer. The UNIX shell is a program to *interface* with the lowest level of UNIX-based operating systems (i.e., the *kernel*). If you are running any Mac OS or Linux Distribution, you are using a *UNIX-based* or *Unix-like* operating system. UNIX-based operating systems have two main parts: the *kernel* and the *utilities*.  The *kernel* is the program managing and allocating the resources of the computer hardware (i.e., the Central Processing Unit or CPU, the Random Access Memory or RAM, and devices like the mouse, speaker, etc). It is a *software layer* facilitating the control of the computer hardware. The *utilities* are a set of commands to interface with the kernel. For instance, if you type `pwd` in your terminal, the kernel will load a program called `pwd` into the RAM, read the program instructions, and display the output, in this case, the current working directory path.
+We begin our journey with the UNIX shell, that cryptic program that runs in your terminal enabling you to do all sort of tasks in your computer. The UNIX shell is a program to _interface_ with the lowest level of UNIX-based operating systems (i.e., the _kernel_). If you are running any Mac OS or Linux Distribution, you are using a _UNIX-based_ or _Unix-like_ operating system. UNIX-based operating systems have two main parts: the _kernel_ and the _utilities_. The _kernel_ is the program managing and allocating the resources of the computer hardware (i.e., the Central Processing Unit or CPU, the Random Access Memory or RAM, and devices like the mouse, speaker, etc). It is a _software layer_ facilitating the control of the computer hardware. The _utilities_ are a set of commands to interface with the kernel. For instance, if you type `pwd` in your terminal, the kernel will load a program called `pwd` into the RAM, read the program instructions, and display the output, in this case, the current working directory path.
 
-The so-called *shell*, also happens to be a UNIX utility program. It has a dual identity: as a *user interface* to the UNIX utilities, and as a *programming language* facilitating the usage and combination of the UNIX utilities. When you open the terminal, the shell program is loaded into the computer memory. When you type commands in the terminal, the shell reads the commands and converts them into a format that is readable by the kernel to be executed. It provides an interactive instance to start programs, manage files, and processes running in the computer. Since the shell is just a program, many variations have been created since 1969, when [Ken Thompson](https://en.wikipedia.org/wiki/Ken_Thompson) developed the the first UNIX implementation at [Bell Labs](https://en.wikipedia.org/wiki/Bell_Labs). The original UNIX shell was written by [Steve Bourne](https://en.wikipedia.org/wiki/Stephen_R._Bourne) in 1970, and it's known as *Bourne shell* or *sh*. The Bourne shell was not available for free at the time, which limited its usage by other programmers. To alleviate this problem, in 1988, the Free Software Foundation tasked [Brian Fox](https://en.wikipedia.org/wiki/Brian_Fox_(computer_programmer)) to develop an open-source reimplementation of the Bourne shell, the so-called *Bourne again shell* or *bash*. Today, the *bash* shell is probably the most widely use implementation of the Unix shell, and the one that serves as a base for us.
+The so-called _shell_, also happens to be a UNIX utility program. It has a dual identity: as a _user interface_ to the UNIX utilities, and as a _programming language_ facilitating the usage and combination of the UNIX utilities. When you open the terminal, the shell program is loaded into the computer memory. When you type commands in the terminal, the shell reads the commands and converts them into a format that is readable by the kernel to be executed. It provides an interactive instance to start programs, manage files, and processes running in the computer. Since the shell is just a program, many variations have been created since 1969, when [Ken Thompson](https://en.wikipedia.org/wiki/Ken_Thompson) developed the the first UNIX implementation at [Bell Labs](https://en.wikipedia.org/wiki/Bell_Labs). The original UNIX shell was written by [Steve Bourne](https://en.wikipedia.org/wiki/Stephen_R._Bourne) in 1970, and it's known as _Bourne shell_ or _sh_. The Bourne shell was not available for free at the time, which limited its usage by other programmers. To alleviate this problem, in 1988, the Free Software Foundation tasked [Brian Fox](<https://en.wikipedia.org/wiki/Brian_Fox_(computer_programmer)>) to develop an open-source reimplementation of the Bourne shell, the so-called _Bourne again shell_ or _bash_. Today, the _bash_ shell is probably the most widely use implementation of the Unix shell, and the one that serves as a base for us.
 
 ## Why to use the UNIX shell
 
-If you haven't use the shell before, you're probably accustomed to interact with computer software via *Graphical User Interfaces* or a *GUI*. This is perfectly fine for most day to day task, but in a research context, there are many important capabilities that GUI interfaces do not provide. In particular, there are a few key capabilities that I want to highlight:
+If you haven't use the shell before, you're probably accustomed to interact with computer software via _Graphical User Interfaces_ or a _GUI_. This is perfectly fine for most day to day task, but in a research context, there are many important capabilities that GUI interfaces do not provide. In particular, there are a few key capabilities that I want to highlight:
 
-- **Repetition**: there are situations when you want to repeat the same action multiple times, sometimes hundreds or thousands of times, actions like changing the extension of a large batch of files or extracting the last line of multiple text files.  Repeating these actions thousands of times with a GUI is beyond unpractical (and probably bad for your health too), and here is where the shell thrives. For example, changing thousands of files with a *.txt* extension to a *.md* extension can be accomplished with a single line like this one:
+- **Repetition**: there are situations when you want to repeat the same action multiple times, sometimes hundreds or thousands of times, actions like changing the extension of a large batch of files or extracting the last line of multiple text files. Repeating these actions thousands of times with a GUI is beyond unpractical (and probably bad for your health too), and here is where the shell thrives. For example, changing thousands of files with a _.txt_ extension to a _.md_ extension can be accomplished with a single line like this one:
 
 ```bash
 ➜ rename "s/txt/md/" *.txt
 ```
 
-***HEADS UP***: In the code blocks, you see will see a  `➜` as a  *prompt* before the actual command. Anything below that indicates the output printed to the terminal. Some commands do not print to the terminal. For instance:
+**_HEADS UP_**: In the code blocks, you see will see a `➜` as a _prompt_ before the actual command. Anything below that indicates the output printed to the terminal. Some commands do not print to the terminal. For instance:
 
 ```bash
 # With standard output to the terminal
@@ -72,21 +70,21 @@ some standard output
 ➜ [shell-command] [ARGUMENT(s)]
 ```
 
-If you copy the instructions to your terminal, remember to delete or ignore the ➜ symbol. Your terminal may have **$** symbol or some other character as a prompt, indicating that the terminal is ready to receive input.  
+If you copy the instructions to your terminal, remember to delete or ignore the ➜ symbol. Your terminal may have **$** symbol or some other character as a prompt, indicating that the terminal is ready to receive input.
 
-- **Automation**: sometimes, instead of repeating the same action, you may want to repeat sequences of actions, or maybe just a single long and complicated action. You may also need to trigger an action automatically in response to some process in your computer. In either case, using the GUI makes you more error prone and slower. Writing the instructions in a *shell script*, a text file with sequences of shell commands, can facilitate these tasks.
+- **Automation**: sometimes, instead of repeating the same action, you may want to repeat sequences of actions, or maybe just a single long and complicated action. You may also need to trigger an action automatically in response to some process in your computer. In either case, using the GUI makes you more error prone and slower. Writing the instructions in a _shell script_, a text file with sequences of shell commands, can facilitate these tasks.
 
-- **Reproducibility**: the fact that you can type sequences of instructions in shell scripts, makes extremely easy to *exactly* reproduce steps in data processing pipelines. Alternatively, you could take snapshots of your GUI and provide lengthy instructions of what to point and click at every step, but that would take more effort, more time, and increase the probability of error.
+- **Reproducibility**: the fact that you can type sequences of instructions in shell scripts, makes extremely easy to _exactly_ reproduce steps in data processing pipelines. Alternatively, you could take snapshots of your GUI and provide lengthy instructions of what to point and click at every step, but that would take more effort, more time, and increase the probability of error.
 
-- **Remote server connection**: if you ever need to connect to another computer from your computer, this is, a *remote server*, you will have to use the shell. For instance, *High-performance computing* (HPC),  *High-throughput computing* (HTC), and *Amazon Web Services* (AWS), are all forms of remote computing that require the users to connect and interact via shell commands.
+- **Remote server connection**: if you ever need to connect to another computer from your computer, this is, a _remote server_, you will have to use the shell. For instance, _High-performance computing_ (HPC), _High-throughput computing_ (HTC), and _Amazon Web Services_ (AWS), are all forms of remote computing that require the users to connect and interact via shell commands.
 
 ## Shell syntax basics
 
-When you pass commands to the terminal, *roughly* speaking, the shell performs the following set of operations:
+When you pass commands to the terminal, _roughly_ speaking, the shell performs the following set of operations:
 
-- If you pass starting with the '#' symbol, the shell will ignore that as a '*comment*' (i.e., it won't do nothing). Comments are usually used in shell scripts rather than in interactive mode, as descriptors of the action to be taken.
+- If you pass starting with the '#' symbol, the shell will ignore that as a '_comment_' (i.e., it won't do nothing). Comments are usually used in shell scripts rather than in interactive mode, as descriptors of the action to be taken.
 
-- If you pass commands without the '#' symbol, the shell reads the inputs and divides them into '*words*' and '*operators*'. By *words* we mean any commands like `cd` (change directory) or `cat` (concatenate files to standard output), plus other constructs related to the specific command; by *operators* we mean arithmetic operators (like `+` or `-`) , relational operators (like `-eq` or `-ne`), boolean operators (like `-o` or `!`), string operators(like `!=` or `=`), or file operators (like `-b` or `c`).
+- If you pass commands without the '#' symbol, the shell reads the inputs and divides them into '_words_' and '_operators_'. By _words_ we mean any commands like `cd` (change directory) or `cat` (concatenate files to standard output), plus other constructs related to the specific command; by _operators_ we mean arithmetic operators (like `+` or `-`) , relational operators (like `-eq` or `-ne`), boolean operators (like `-o` or `!`), string operators(like `!=` or `=`), or file operators (like `-b` or `c`).
 
 - Then, the shell parse the words and operators into subtypes, performs a series of intermediate steps like expansions and redirections, to finally execute the commands instructions.
 
@@ -94,19 +92,19 @@ When you pass commands to the terminal, *roughly* speaking, the shell performs t
 
 Before moving into more applied topics, I want to briefly review the concepts of standard input, standard output, and standard error, as I will use them constantly in this tutorial.
 
-Linux or unix-like systems have what is known as "standard streams of data". Any process run in such systems is initialized with three data streams: *standard input*, *standard ouput*, and *standard error*. By data we mean instructions in plain text formart.
+Linux or unix-like systems have what is known as "standard streams of data". Any process run in such systems is initialized with three data streams: _standard input_, _standard ouput_, and _standard error_. By data we mean instructions in plain text formart.
 
-**Standard input** or "stdin", referes the "place" where programs or processes *get* information from. By default, the shell "takes" input from the keyboard. In other words, standard input is the default place and source of information for Linux/Bash programs.
+**Standard input** or "stdin", referes the "place" where programs or processes _get_ information from. By default, the shell "takes" input from the keyboard. In other words, standard input is the default place and source of information for Linux/Bash programs.
 
-**Standard output** or "stdout", referes the "place" where programs or processes *send* information to. By default, the shell output will be directed to the screen or monitor (i.e., printed in the terminal), but it can also for to a text file or a printer. In other words, standard outut is the default place where information is send after processing.
+**Standard output** or "stdout", referes the "place" where programs or processes _send_ information to. By default, the shell output will be directed to the screen or monitor (i.e., printed in the terminal), but it can also for to a text file or a printer. In other words, standard outut is the default place where information is send after processing.
 
-**Standard error** or "stderr", referes the "place" where programs or processes *send* errors. By default, the shell output will be directed to the screen or the monitor(i.e., printed in the terminal). In other words, standard error is the default place where the shell send messages about processes that went wrong.
+**Standard error** or "stderr", referes the "place" where programs or processes _send_ errors. By default, the shell output will be directed to the screen or the monitor(i.e., printed in the terminal). In other words, standard error is the default place where the shell send messages about processes that went wrong.
 
 Knowing this concepts will make undertanding bash documentation much easier.
 
 ## Shell commands basics
 
-Broadly speaking, there two types of shell commands: *single* commands and *composed* commands.
+Broadly speaking, there two types of shell commands: _single_ commands and _composed_ commands.
 
 ### Single commands
 
@@ -124,11 +122,11 @@ Here we have:
 
 ### Composed commands
 
-Composed commands are created by combining simple commands into *pipelines*, *lists*, *compounds*, and *coproceses*. We will examine the first three, as are the ones more commonly used.
+Composed commands are created by combining simple commands into _pipelines_, _lists_, _compounds_, and _coproceses_. We will examine the first three, as are the ones more commonly used.
 
 #### Pipeline
 
-A pipeline is a sequence of one or more commands separated by one of the control operators ‘|’ or ‘|&’, where the *output* of the first command becomes the *input* of the next. For instance:
+A pipeline is a sequence of one or more commands separated by one of the control operators ‘|’ or ‘|&’, where the _output_ of the first command becomes the _input_ of the next. For instance:
 
 ```bash
 ➜ ls -l | grep ".txt"
@@ -144,7 +142,7 @@ Lists are a sequence of one or more pipelines separated by one of the operators 
 ➜ ls | grep ".txt" && ls | grep ".csv"
 ```
 
-The pipeline on the left side of *&&* will print the files matching the ".txt" , and the pipeline on the right side, will print the files matching the ".csv" extension, only if the left side was executed successfully. 
+The pipeline on the left side of _&&_ will print the files matching the ".txt" , and the pipeline on the right side, will print the files matching the ".csv" extension, only if the left side was executed successfully.
 
 #### Compound commands
 
@@ -154,13 +152,13 @@ Compound commands are shell programming constructs that allow for more complex o
 ➜ while test-commands; do consequent-commands; done
 ```
 
-This will tell the shell to repeat certain action (*consequent-commands*), while some other condition is true (*test-commands*). The `while` keyword indicates the beginning, and the `done` keyword indicate the end. 
+This will tell the shell to repeat certain action (_consequent-commands_), while some other condition is true (_test-commands_). The `while` keyword indicates the beginning, and the `done` keyword indicate the end.
 
 ## A curated list of basic shell commands
 
 Now that we have enough background knowledge about the inner workings of the shell, we will review a list of the, in my opinion, most useful commands in a research context. This is the most important and practical part of this tutorial. I don't pretend to be exhaustive here. More commands will be introduced in later sections.
 
-***HEADS UP***: In case you use the GitHub repository to follow the examples, be aware the exact output showed here may be different, given that this is a project in constant development. However, the instructions and command description hold true.
+**_HEADS UP_**: In case you use the GitHub repository to follow the examples, be aware the exact output showed here may be different, given that this is a project in constant development. However, the instructions and command description hold true.
 
 ### Basic commands
 
@@ -213,7 +211,7 @@ NAME
 
 Technically, `help` is not a command, but an option for most commands. I'm including this here because along with `man` is one of the most handy tools to learn about and use bash. You can think on `help` as quicker way to look at the documentation.
 
-For instance, to learn more about  `man`
+For instance, to learn more about `man`
 
 ```bash
 ➜ man --help
@@ -232,7 +230,7 @@ There are some operations that you can perform with files, like text files, comm
 
 #### `ls`
 
-The `ls` command *list directory contents*. 
+The `ls` command _list directory contents_.
 
 The syntax is: `ls [OPTION(s)] [FILE(s)]`
 
@@ -250,11 +248,11 @@ b-folder  got-characters-copy.txt  harry-potter-characters.txt  unix_shell.md
 
 Hidden files usually begin with a dot in UNIX-bases systems. To list them along with the visible files you need to add the `-a` option. Here I'm adding `./characters-folder` to list the contents in that directory instead of the current one.
 
-````bash
+```bash
 ➜ ls -a ./characters-folder
 .   got-characters-copy.txt  harry-potter-characters.txt
 ..  got-characters.txt       .hidden-file.txt
-````
+```
 
 ##### List directory contents in long format
 
@@ -275,18 +273,18 @@ There is a lot of information here. Let's examine this part by part:
 
 - The first character indicates the [file type](https://en.wikipedia.org/wiki/Unix_file_types). In this example is `d` for directory or `-` for regular file. There are more types that you can look up on-line.
 - The next nine characters indicate file permissions.
-  - *Characters 1-3*, are for the *user*. Here `-rw` means *reading* and *writing* permissions
-  - *Characters 4-6* are for the *group*. Here `-r-` means *reading* permission only
-  - Characters 7-9 are for *others*. Here `-r-` means *reading* permission only
+  - _Characters 1-3_, are for the _user_. Here `-rw` means _reading_ and _writing_ permissions
+  - _Characters 4-6_ are for the _group_. Here `-r-` means _reading_ permission only
+  - Characters 7-9 are for _others_. Here `-r-` means _reading_ permission only
 - The number after the permission string indicates the the number of [hard links](https://en.wikipedia.org/wiki/Hard_link) to the file
-- Next, the `pablo pablo` indicates the *file owner* and the *group*, respectively.
+- Next, the `pablo pablo` indicates the _file owner_ and the _group_, respectively.
 - The number after the group name, indicates the file size in bytes.
-- Next, the `Feb  8 15:33` indicates the *date* and *time* of the *last modification* to the file.
+- Next, the `Feb  8 15:33` indicates the _date_ and _time_ of the _last modification_ to the file.
 - Finally, the last column display the file name.
 
 ##### List directory contents by custom order
 
-The `ls` command will sort files alphabetically by default.  You can use the `--sort=KEYWORD` to sort files by *size*, *time*, *version*, *extension*.
+The `ls` command will sort files alphabetically by default. You can use the `--sort=KEYWORD` to sort files by _size_, _time_, _version_, _extension_.
 
 ```bash
 # sort by size
@@ -315,7 +313,7 @@ drwxr-xr-x 2 pablo pablo  4096 Feb  8 15:25 a-folder
 
 #### `cat`
 
-The `cat` command *concatenates and print contents of a file to standard output* (I know, confusingly, it has nothing to do with cats).
+The `cat` command _concatenates and print contents of a file to standard output_ (I know, confusingly, it has nothing to do with cats).
 
 The syntax is: `cat [OPTION(s)] [FILE(s)]`
 
@@ -340,7 +338,7 @@ Arya
 Daenerys
 ```
 
-##### Display numerated file's contents 
+##### Display numerated file's contents
 
 ```bash
 ➜ cat -n got-characters.txt
@@ -365,7 +363,7 @@ Now, if you type `cat new-characters.txt` the list of names will be printed in t
 
 #### `cp`
 
-The `cp` command *copy files and directories*.
+The `cp` command _copy files and directories_.
 
 The syntax is: `cp [OPTION(s)][SOURCE] [DESTINY]`
 
@@ -389,15 +387,15 @@ cp got-characters.txt ./a-folder
 cp -r /a-foler ./b-folder
 ```
 
-The `-r` option stand for *recursive*. This option is required to copy directories.
+The `-r` option stand for _recursive_. This option is required to copy directories.
 
 #### `touch`
 
-The `touch` command changes files timestamps. However, `touch` is commonly used to create new empty files. 
+The `touch` command changes files timestamps. However, `touch` is commonly used to create new empty files.
 
-To change timestamps of an *existing* *file* the syntax is `touch [OPTION(s)] [FILE(s)]`
+To change timestamps of an _existing_ _file_ the syntax is `touch [OPTION(s)] [FILE(s)]`
 
-To create an *new empty file* the syntax is `touch [FILE(s)]` 
+To create an _new empty file_ the syntax is `touch [FILE(s)]`
 
 ##### Change the time-stamp of an existing file
 
@@ -405,7 +403,7 @@ First, I'll review the access and modification times using the `stat` command, t
 
 ```bash
 # review access time and modification time
-➜ stat harry-potter-characters.txt 
+➜ stat harry-potter-characters.txt
   File: harry-potter-characters.txt
   Size: 19        	Blocks: 8          IO Block: 4096   regular file
 Device: 10307h/66311d	Inode: 3440036     Links: 1
@@ -416,10 +414,10 @@ Change: 2020-02-08 15:06:40.426141133 -0600
  Birth: -
 
 # change access and modficiation time
-touch -am harry-potter-characters.txt 
+touch -am harry-potter-characters.txt
 
 # review access time and modification time after change
-➜ stat harry-potter-characters.txt     
+➜ stat harry-potter-characters.txt
   File: harry-potter-characters.txt
   Size: 19        	Blocks: 8          IO Block: 4096   regular file
 Device: 10307h/66311d	Inode: 3440036     Links: 1
@@ -430,7 +428,7 @@ Change: 2020-02-08 17:37:05.054635614 -0600
  Birth: -
 ```
 
-Here, the `-a` and `-m` options change the *access time* and *modification time*, respectively. If you compare the `Access` and `Modify` entries from the top and the bottom of the code block, you'll see the changes. 
+Here, the `-a` and `-m` options change the _access time_ and _modification time_, respectively. If you compare the `Access` and `Modify` entries from the top and the bottom of the code block, you'll see the changes.
 
 ##### Create a new empty file
 
@@ -474,14 +472,14 @@ The syntax for basic pattern matching is `grep [OPTION(s)] [PATTERN] [FILE(s)]`
 
 The syntax for pattern matching as extended regular expressions is `grep [OPTION(s)] -e [PATTERN] [FILE(s)]`
 
-The syntax for pattern matching using the `[PATTERN]` as a list of fixed string (instead of regular expression) is  `grep [OPTION(s)] -f [STRING] [FILE(s)]`
+The syntax for pattern matching using the `[PATTERN]` as a list of fixed string (instead of regular expression) is `grep [OPTION(s)] -f [STRING] [FILE(s)]`
 
 ##### Basic pattern matching
 
 ```bash
-➜ grep Harry harry-potter-characters.txt 
+➜ grep Harry harry-potter-characters.txt
 Harry
-➜ grep Jon got-characters.txt 
+➜ grep Jon got-characters.txt
 Jon
 ```
 
@@ -507,14 +505,14 @@ In the pattern matching case you have to add the backslash [escape character](ht
 The `grep` command is often used in combination with others bash tools. For instance, we can list all the files in the current directory with `ls`, then pass the output as input to `grep`, and search for all files containing the string "got".
 
 ```bash
-➜ ls | grep got                    
+➜ ls | grep got
 got-characters-copy.txt
 got-characters.txt
 ```
 
 `wc`
 
-The `wc` command prints how many new lines, words, and bytes are in  file.
+The `wc` command prints how many new lines, words, and bytes are in file.
 
 The basic syntax is `wc [OPTION(s)] [FILE]`
 
@@ -831,7 +829,7 @@ To append output we use the `>>` operator as:
 ➜ echo "Plum" >> catbug.txt
 ```
 
-This will cause to append (i.e., print at the end) the output of `echo "Plum"` , to the  catbug.txt file. If you use `>` instead, the contents will be replaced rather than appended. This is you will get only:
+This will cause to append (i.e., print at the end) the output of `echo "Plum"` , to the catbug.txt file. If you use `>` instead, the contents will be replaced rather than appended. This is you will get only:
 
 ```bash
 Plum
