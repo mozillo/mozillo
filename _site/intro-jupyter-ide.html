@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>Introduction to Jupyter Notebooks - set-up, user-guide, and best practices</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+  
+</head>
+
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>catbug88@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <a href="/archive"><h2 class="header-link">Archive</h2></a>
+<a href="/about"><h2 class="header-link">About</h2></a>
+
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        
+<!-- https://docs.mathjax.org/en/latest/configuration.html#local-config-files -->
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-AMS-MML_HTMLorMML,https://idcrook.github.io/assets/js/MathJaxLocal.js">
+</script>
+
+
+
+<article>
+	<h2>Introduction to Jupyter Notebooks - set-up, user-guide, and best practices</h2>
+	<time datetime="2020-06-12T00:00:00+08:00" class="by-line"
+		>12 Jun 2020</time
+	>
+	<iframe src="https://github.com/sponsors/pabloinsente/card" title="Sponsor pabloinsente" height="225" width="600" style="border: 0;"></iframe>
+
+<p><strong>Notes</strong>:</p>
+<ul>
+  <li>This tutorial contains video-lessons at the end of each section</li>
+  <li>The Jupyter Notebook version can be found in my GitHub <a href="https://github.com/pabloinsente/intro-sc-python/blob/master/notebooks/intro-jupyter-ide.ipynb">here</a></li>
+</ul>
+
+<h2 id="ides-integrated-development-environments">IDEs: Integrated Development Environments</h2>
+
+<p>There are several ways in which we can interact with Python:</p>
+
+<ol>
+  <li>Via the terminal in Python interactive mode</li>
+  <li>Via the terminal by running Python scripts written in a text editor</li>
+  <li>Via an Integrated Development Environment (IDE)</li>
+</ol>
+
+<p>In this mini-workshop I’ll focus on IDEs, as they are more commonly used alternative for data analysis and scientific computing with Python. Pretty much all educational content and examples you will find on-line about the subject are created in and for IDEs.</p>
+
+<p>Popular IDEs for Python are Spyder, PyCharm, VSCode, and Jupyter Notebooks. This are all valid options with advantages and disadvantages. I’ll focus in Jupyter Notebooks for a couple of reasons:</p>
+
+<ol>
+  <li>They can be run in cloud-based computing environments easily</li>
+  <li>They allow to create interactive documents, combining text, code, and graphics, which is great for educational content</li>
+  <li>Most on-line examples and educational materials in scientific computing and data analysis are created in Jupyter Notebooks</li>
+  <li>It is beginner friendly and intuitive to use</li>
+</ol>
+
+<p>Jupyter Notebooks do have several drawbacks that can become a problem for more advance users, which may prefer to work in text-based IDEs like PyCharm or VSCode. I will briefly mention such drawbacks later, so you are aware of them. It is also worth notice that VSCode and PyCharm allow for Jupyter-like interfaces, which you can check it our <a href="https://code.visualstudio.com/docs/python/jupyter-support">here</a> and <a href="https://www.jetbrains.com/help/pycharm/jupyter-notebook-support.html">here</a>.</p>
+
+<h2 id="jupyter-notebooks">Jupyter Notebooks</h2>
+
+<p>Jupyter is an <a href="https://github.com/jupyterlab/jupyterlab">open-source software</a> for interactive computing for a variety of programming languages like Python, Julia, R, Ruby, Haskell, Javascript, Scala, and <a href="https://github.com/jupyter/jupyter/wiki/Jupyter-kernels">many others</a>. The document you are reading right now is an example of a Jupyter Notebook.</p>
+
+<p>Jupyter Notebooks have become popular among researchers and data scientists because of several convenient characteristics:</p>
+
+<ol>
+  <li>Allows for the combination of a narrative, code, and the results of computations in one place</li>
+  <li>Easy to use intuitive interface</li>
+  <li>Flexibility on supporting multiple programming languages</li>
+  <li>Integration with cloud computing environments</li>
+</ol>
+
+<p>Such characteristics permit to effortlessly reproduce the workflow of most researchers and data scientists: the description of a research problem and methods in prose, plus the code to run the analysis and models to analyze datasets, and the presentation of results in tables and charts. You can even export your computational Notebook into PDF, Markdown, HTML, and others easy to share formats.</p>
+
+<p>Jupyter Notebooks evolved from a project called <a href="https://ipython.org/">IPython</a>, which was created by the Colombian Berkeley Professor <a href="https://bids.berkeley.edu/people/fernando-p%C3%A9rez">Fernando Pérez</a>, who at the time was a graduate student in Physics at CU Boulder. <a href="https://www.youtube.com/watch?v=xuNj5paMuow">Here</a> you can watch a Fernando’s presentation about his journey creating Jupyter Notebooks.</p>
+
+<p>Although nowadays Jupyter is the most widely used IDE for scientific computing and data science worldwide, the idea of computational notebooks predates Project Jupyter. The first computational notebooks, today named <a href="https://www.wolfram.com/notebooks/">Wolfram Notebooks</a>, were introduced by <a href="https://www.stephenwolfram.com/">Stephen Wolfram</a> for the <a href="https://www.wolfram.com/mathematica/">Wolfram Mathematica</a> programming language. The issue was that Wolfram Mathematica and Wolfram Notebooks are a closed-sources proprietary software, i.e., you have to pay for it.</p>
+
+<p>Fortunately, today we have access to Jupyter Notebooks for free, which is developed and maintained primarily by a large community of users from all over the world.</p>
+
+<h2 id="jupyterlab">JupyterLab</h2>
+
+<p><a href="https://github.com/jupyterlab/jupyterlab">JupyterLab</a> is the next-generation interface for Jupyter Notebook. Essentially, they are an extension build on top the classic Jupyter Notebook, but with improved capabilities and features. I will use the JupyterLab interface for this mini-workshop, as it is the most up to date version of Project Jupyter, and is expected to fully replace the classic Jupyter Notebook in the short term. Project Jupyter developers advise the use of JupyterLab as they are investing they efforts on maintaining and developing this platform.</p>
+
+<p>Note that there some minor but important differences between the interface Jupyter Notebooks and JupyterLab, so you are advised to search for JupyterLab specific extensions and tutorials, since functionality may differ.</p>
+
+<h2 id="jupyterlab-basics">JupyterLab basics</h2>
+
+<h3 id="installing-jupyterlab">Installing JupyterLab</h3>
+
+<p>Before installing JupyterLab, I am assuming you have a recent version of Python 3 installed. Any Python version greater than 3.6 should work. Utilizing a virtual environment it is also recommended to isolate your JupyterLab installation.</p>
+
+<p>It is also good idea to update <code class="language-plaintext highlighter-rouge">pip</code> before installing jupyterLab by running:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python <span class="nt">-m</span> pip <span class="nb">install</span> <span class="nt">--upgrade</span> pip
+</code></pre></div></div>
+
+<p>JupyterLab can be installed with <code class="language-plaintext highlighter-rouge">pip</code> in the terminal as:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># is recommended to run this in a virtual environment</span>
+pip3 <span class="nb">install </span>jupyterlab
+</code></pre></div></div>
+
+<p>or as:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 <span class="nt">-m</span> pip <span class="nb">install </span>jupyterlab
+</code></pre></div></div>
+
+<p>A second option is with <code class="language-plaintext highlighter-rouge">conda</code></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># is recommended to run this in a conda virtual environment</span>
+conda <span class="nb">install</span> <span class="nt">-c</span> conda-forge jupyterlab
+</code></pre></div></div>
+
+<p>I personally prefer to use <code class="language-plaintext highlighter-rouge">pip</code> as I find it’s simpler, cleaner, and works out-of-the-box with your Python installation.</p>
+
+<p>Also take into account that the above instructions will install the latest stable release of JupyterLab.</p>
+
+<p>To check you installation was succesful, run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jupyterlab <span class="nt">--version</span>
+</code></pre></div></div>
+
+<h3 id="launching-jupyterlab">Launching JupyterLab</h3>
+
+<p>To launch JupyterLab open the terminal, navigate to your working directory, and run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jupyter lab
+</code></pre></div></div>
+
+<p>JupyterLab will launch a session in your default browser. If you want to launch JupyterLab in a different browser, you can either change your default browser or to copy-past the Notebook address in your desired browser.</p>
+
+<h3 id="jupyterlab-interface">JupyterLab interface</h3>
+
+<p>The JupyterLab interface consists of:</p>
+
+<ol>
+  <li>a <strong>main work area</strong> containing tabs for the notebooks, terminals, and text files</li>
+  <li>a <strong>collapsible left sidebar</strong> containing a file browser, the running kernels and terminals, the command palette, the cell inspector, the list of open tabs, and any other extension you may have activated.</li>
+  <li>a top <strong>menu bar</strong>.</li>
+</ol>
+
+<h3 id="creating-and-renaming-a-notebook">Creating and renaming a Notebook</h3>
+
+<p>JupyterLab will open the Launcher tab as default, where you can select what kind of instance you want to run. By default, JupyterLab will allow for a Notebook with Python 3 kernel, a IPython console, a bash terminal, a Markdown file, and a text editor.</p>
+
+<p>To create a Notebook click under “Notebook” in the Launcher, and select a Python 3 kernel when prompted. Alternatively, you can create new Notebooks by clicking “File” in the top menu bar, then “New”, and then “Notebook.</p>
+
+<p>It is important to rename the Notebook as JupyterLab will give an “Untitled.ipynb” name as default to all new Notebooks.</p>
+
+<h2 id="video-i---introduction-and-set-up">Video I - Introduction and set-up</h2>
+
+<div class="embed-container">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/U5Hg1Anxy7g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</div>
+
+<h3 id="interacting-with-files">Interacting with files</h3>
+
+<p>JupyterLab will load up directory and subdirectories from which you open it up in the terminal. As JupyterLab is very flexible, you will be able to open pretty much any file by double clicking on it: notebooks, images, text files, json files, csv files, and much more.</p>
+
+<p>One of the improved capabilities of JupyterLab is its ability to open large csv files in a excel-like nice looking interface.</p>
+
+<p>Another great JupyterLab feature is the possibility of rearranging your workspace with multiple windows at once, which is great for when you want to work with multiple files side by side.</p>
+
+<p>Additionally, files that can be open in more than one format, can be put side by side, and the changes you make in one view/format of the file will reflect in the other view/format. For instance, Markdown files can be open as rendered versions or as raw text. Notice that you have to save the changes before they are reflected in the other view/format.</p>
+
+<p>A common task in data manipulation is to open files like <code class="language-plaintext highlighter-rouge">csv</code> datasets and <code class="language-plaintext highlighter-rouge">png</code> images. To import such files into your Notebook, you will need to know the “path” to the file. File paths can be easily obtained by right-clicking in the desired file and selecting “Copy path”.</p>
+
+<p>Uploading files can be done by clicking the “Upload Files” arrow-icon in the left sidebar or by dragging and dropping the files onto the file navigator in the browser.</p>
+
+<p>Downloading files can be done by right-clicking in the desired file, and selecting the “Download” option.</p>
+
+<h2 id="interacting-with-notebooks">Interacting with Notebooks</h2>
+
+<p>As I mentioned earlier, Notebooks main advantage is its capacity to combine a narrative (text), with code to run analysis and models, and the analysis outcomes as tables and plots, all in one place. As a bonus, Notebooks allow to render LaTeX output, which is fabulous if you need to introduce equations.</p>
+
+<p>Notebooks are made out of collections of <strong>cells</strong>. A cell is simply a rectangular box in which you can type and visualize stuff. There are three types of cells:</p>
+
+<ul>
+  <li><strong>Markdown cells</strong>: this are used to write your document, and to organize the content in titles, sub-titles, and so on</li>
+  <li><strong>Code cells</strong>: this are used to run code</li>
+  <li><strong>Raw cells</strong>: this are essentially plain text</li>
+</ul>
+
+<p>The easiest way to change between cell types, is by clicking on the drop-down tab at the top of the Notebook and selecting the one you want. You can also use the keyboard shortcuts which are <code class="language-plaintext highlighter-rouge">Esc</code> + <code class="language-plaintext highlighter-rouge">M</code> for Markdown, <code class="language-plaintext highlighter-rouge">Esc</code> + <code class="language-plaintext highlighter-rouge">Y</code> for Code, and <code class="language-plaintext highlighter-rouge">Esc</code> + <code class="language-plaintext highlighter-rouge">R</code> for Raw.</p>
+
+<p>To run a cell, you can either go to the top menu bar, select “Run”, and then click in “Run Selected Cell”. In practice, most people uses the <code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">Enter</code> keyboard shortcut. You can also use <code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">Enter</code> or <code class="language-plaintext highlighter-rouge">Alt</code> + <code class="language-plaintext highlighter-rouge">Enter</code> to run the current cell and insert a cell below.</p>
+
+<p>You can create new cells by clicking in the <code class="language-plaintext highlighter-rouge">+</code> symbol in the top bar of the Notebook, or with the <code class="language-plaintext highlighter-rouge">Esc</code> + <code class="language-plaintext highlighter-rouge">B</code> keyboard shortcut.</p>
+
+<p>To delete cells, you can right-click on the cell and select “Delete Cell”, or you can use <code class="language-plaintext highlighter-rouge">Esc</code> + <code class="language-plaintext highlighter-rouge">DD</code> shortcut.</p>
+
+<p>To copy cells, you can right-click on the cell and select “Copy Cell”, or to use <code class="language-plaintext highlighter-rouge">Esc</code> + <code class="language-plaintext highlighter-rouge">C</code> keyboard shortcut. To past a copied cell, you can right-click on the cell and select “Paste Cell Below” to insert the cell below th active cell, or to use <code class="language-plaintext highlighter-rouge">Esc</code> + <code class="language-plaintext highlighter-rouge">V</code> keyboard shortcut.</p>
+
+<p>To cut cells, you can ither use the “scissors” icon at the top of the workspace bar, or to use the <code class="language-plaintext highlighter-rouge">Esc</code> + <code class="language-plaintext highlighter-rouge">X</code> keyboard shortcut.</p>
+
+<p>When you insert new cells, you won’t be able to type content into the cell immediately. You need to enter in “command” or “enter mode”. To do this you can double-click on the cell, or to use the <code class="language-plaintext highlighter-rouge">Enter</code> keyboard shortcut.</p>
+
+<p>Accidentally deleting cells is something may happen often in Notebooks. To recover a deleted cell, you can right-click on the cell that became active after deletion, and select “Redo Cell Operation”, or to use the <code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">Z</code> keyboard shortcut.</p>
+
+<p>Remembering Python syntax, commands, and library methods, can be thought at the beginning. Notebooks offer a few useful tools to help with this. When typing  a Python command, you can click <code class="language-plaintext highlighter-rouge">Tab</code> and JupyterLab will generate a drop-down menu where you can search for commands and methods to complete your code. This is the so-called <em>Tab completion</em>. Tab completion is usually very powerful in IDEs like VSCode and Pycharm, but a bit slow and incomplete for JupyterLab.</p>
+
+<p>A second Notebook tool to remember commands and methods is the “Contextual Help”. The contextual help is activated by clicking on “Help” in the top bar menu, and selecting “Show Contextual Help”, or wit the <code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">I</code> shortcut. The Contextual Help will open as a new tab, so you can rearrange your workspace to have the Contextual Help tab side by side your Notebook. Contextual Help works by searching the documentation for a function when you select it. Keep in mind it won’t work for all functions.</p>
+
+<p>To move cells around you can hover over the left-side of the cell, and click to drag and drop the cell in a new location. Although this is a nice feature, I strongly advise against it for reasons I will review later.</p>
+
+<p>To save changes made to your Notebook, you can click on “File” at the top bar menu and select “Save Notebook” or “Save All”, or to simply use the <code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">S</code> keyboard shortcut. Fortunately, JupyterLab routinely save your progress in the background so it can be recovered if your browser closes for any reason.</p>
+
+<h2 id="video-ii---intercting-with-files-and-notebooks">Video II - Intercting with files and Notebooks</h2>
+
+<div class="embed-container">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pQsDd0N2kNQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</div>
+
+<h2 id="interacting-with-the-kernel">Interacting with the Kernel</h2>
+
+<p>The first time I heard about a “Kernel” I was deeply confused (I’m still a bit confused to be honest). Put simply, a Kernel is an “instance” of the Python interpreter that runs in the background and process the code instructions you type in Notebook cells. Same for any other dynamic programming language like R, Scala, or Julia. This is why “Kernels” of multiple programming languagues can be added and run in parallel in JupyterLab.</p>
+
+<p>You can see what Kernels are being run in your session by clicking on the “Terminals and Kernels” icon in the left sidebar. Such menu also allows to shut down Kernels. Notice thay closing a Notebook or Console will not shut down the running Kernel. Shutting down a Kernel must be explicitly done in the Kernel session menu or the terminal where you open up JupyterLab.</p>
+
+<p>The “Kernel” tab in the top bar menu also allow to do Actions on Kernels, like shutting down the current Kernel or all running Kernels.</p>
+
+<p>Common Kernel operations are Interrupting and Restarting. Interrupting is sometimes necessary to stop computations have been running for too long and may be corrupted. Restarting is sometimes necessary to generate a clean environment to work with the same Notebook. Interrupting can be done in the “Kernel” menu or with the <code class="language-plaintext highlighter-rouge">Esc</code> + <code class="language-plaintext highlighter-rouge">II</code> keyboard shortcut. Restarting can also be done in the “Kernel” menu or with he <code class="language-plaintext highlighter-rouge">Esc</code> + <code class="language-plaintext highlighter-rouge">OO</code> menu.</p>
+
+<p>Another important operation is to “Restart the Kernel and Run All Cells”. This is often done because you want to make sure the code in the Notebook run without problems from top-to-bottom, which can be a problem given how Notebooks work. This can only be done in the “Kernel” menu.</p>
+
+<h2 id="jupyterlab-extensions">JupyterLab Extensions</h2>
+
+<p>JupyterLab has the flexibility of incorporating extensions, this is, additional functionality which is not available “out-of-the-box”. Such extensions are primarily created by the community of users and developers in the Jupyter community, and are free to use.</p>
+
+<p>Under the hood, JupyterLab is essentially a bunch of JavaScipt code, which is the dominant programming languague in the web development sphere. This means that JupyterLab extensions are developed in JavaScript, which implies to will need Node.js in your machine to install JupyterLab extensions.</p>
+
+<p>There are two ways to install extensions: with the Extension Manager and in the terminal. The Extension Manager it is also an extension (very meta), which provides a graphic user interface within JupyterLab to install extensions. You won’t find it at first because it is disable by default. To enable it, go to the search bar in the command pallet, and search for “Extension Manager”. Once enabled, you will see a puzzle-shape icon in the left sidebar.</p>
+
+<p>You can search and install extensions by searching by name in the search bar in the Extension Manager. Now, before you jumping to install extensions, beware that extensions allow for the execution of unchecked code in your Kernel and browser instance. JupyterLab partially address this issue by adding a JupyterLab Icon on the extensions “verified” by Project Jupyter. I have to acknowledge that I have never paying attention to who created the extension or if its verified or not before installing it. You may be wiser than me and check that out before installing extensions.</p>
+
+<p>Installing extension in the Extension Manager is as simple as to click on the “Install” icon. Once the installation is done, JupyterLab will prompt you to reload your workspace to make the extension available for use. Disabling extensions can be done in the Extension Manager as well, by simply searching the extension in the search bar and clicking on “Disable”.</p>
+
+<p>You can also install extension in the command line. To do this, you have to run :</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jupyter labextension <span class="nb">install </span>my-extension
+</code></pre></div></div>
+
+<p>Where “my-extension” stands for the extension name in the <a href="https://www.npmjs.com/">npm package repository</a>. For instance, to install the “@jupyterlab/toc” extension:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jupyter labextension <span class="nb">install</span> @jupyterlab/toc
+</code></pre></div></div>
+
+<p>You can search for extensions <a href="https://www.npmjs.com/">here</a> by searching for “jupyterlab” in the search bar.</p>
+
+<p>Note that if you are using a virtual environment to run JupyterLab, you must open the terminal, activate the virtual environment, and then install the extension. Once the installation process is done, you will have to reload JupyterLab by clicking in the reload icon in your browser.</p>
+
+<h2 id="cool-and-useful-jupyterlab-extensions">Cool and useful JupyterLab extensions</h2>
+
+<p>JupyterLab benefits from a constantly growing library of extension to enhance functionality and user experience. Here I’ll just mention five of my favorites that I found significantly improve my productivity and enjoyment.</p>
+
+<h3 id="table-of-contents-extension-toc">Table of contents extension (TOC)</h3>
+
+<p>The TOC extension allows to organize sections in a Table of Contents, which is auto-generated following markdown heading conventions. You can click and navigate the document with the TOC in the left sidebar.</p>
+
+<p>To install <code class="language-plaintext highlighter-rouge">toc</code> extension the terminal run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jupyter labextension <span class="nb">install</span> @jupyterlab/toc
+</code></pre></div></div>
+
+<p>Or search for it in the Extension Manager</p>
+
+<h3 id="spell-checker-extension">Spell checker extension</h3>
+
+<p>I happen to write a lot in JupyterLab, and one of my major complaints is the lack of an spell checker as traditional text editors. The jupyterlab_spellchecker extension partially address this by highlighting misspelled words. It won’t suggest the correct spelling, but at least it will let you know you misspelled something.</p>
+
+<p>Note that this extension will also highlight any unrecognized word according to the <a href="https://github.com/cfinke/Typo.js">Typo.js</a> library, meaning that words like “JupyterLab” will be highlighted. It also can be a bit annoying at first to have misspelled words highlighted as it does it while you write, instead of after. Yet, as non-native speaker, I prefer to tolerate such annoyance to produce better writing.</p>
+
+<p>To install in the terminal <code class="language-plaintext highlighter-rouge">jupyterlab_spellchecker</code> run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jupyter labextension <span class="nb">install</span> @ijmbarr/jupyterlab_spellchecker
+</code></pre></div></div>
+
+<p>Or search for it in the Extension Manager.</p>
+
+<h3 id="collapsible-headings">Collapsible headings</h3>
+
+<p>Sometimes Notebooks may get very long, which makes navigation annoying or slow. There are sections you may not even need to work anymore and that would be better to have out of your sight. The <code class="language-plaintext highlighter-rouge">collapsible_headings</code> extension allows to collapse / uncollapse sections by clicking on the caret icon on the top left corner of the cell defining a section.</p>
+
+<p>To install the <code class="language-plaintext highlighter-rouge">collapsible_headings</code> with the terminal run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jupyter labextension <span class="nb">install</span> @aquirdturtle/collapsible_headings
+</code></pre></div></div>
+
+<p>Or search for it in the Extension Manager.</p>
+
+<h3 id="shortcut-manager">Shortcut manager</h3>
+
+<p>As you may have notice by now, JupyterLab has a wide variety of keyword shortcuts to improve productivity. The <code class="language-plaintext highlighter-rouge">shortcutui</code> allows to both explore the current available shortcuts in your system, and to define new ones, in a simple graphic interface.</p>
+
+<p>To access the keyboard shortcuts editor click on the “Settings” or “Help” tabs in the top menu bar, and select “Keyboard Shortcut Editor”.</p>
+
+<p>To install <code class="language-plaintext highlighter-rouge">shortcutui</code> with the terminal run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jupyter labextension <span class="nb">install</span> @jupyterlab/shortcutui
+</code></pre></div></div>
+
+<p>Or search for it in the Extension Manager.</p>
+
+<h3 id="jupyterlab-neon-theme">Jupyterlab Neon Theme</h3>
+
+<p>Some people like light-themes (white background) editors, some like dark-theme editors, and some, like me, like shinny neon purple editors. It just easier on my eyes and pleasant to look at. The Jupyter Neon Theme extension provides exactly that.</p>
+
+<p>To install the <code class="language-plaintext highlighter-rouge">jupyterlab_neon_theme</code> extension in the terminal run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jupyter labextension <span class="nb">install</span> @yeebc/jupyterlab_neon_theme
+</code></pre></div></div>
+
+<p>To actually use it, click on “Settings” in the top bar menu, then in “JupyterLab Theme”, and then in “JupyterLab Neon Theme” (or any theme you have available and want to try).</p>
+
+<p>Or search for <code class="language-plaintext highlighter-rouge">jupyterlab_neon_theme</code> in the Extension Manager.</p>
+
+<h2 id="video-iii---kernel-and-extensions">Video III - Kernel and Extensions</h2>
+
+<div class="embed-container">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/lYFusU11RbY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</div>
+
+<h2 id="exporting-notebooks">Exporting Notebooks</h2>
+
+<p>Notebooks have the <code class="language-plaintext highlighter-rouge">.ipynb</code> extension, which stands for interactive python notebook. However, Notebooks can be exported in a wide variety of formats:</p>
+
+<ul>
+  <li>Asciidoc .asciidoc</li>
+  <li>HTML .html</li>
+  <li>Latex .tex</li>
+  <li>Markdown .md</li>
+  <li>PDF .pdf</li>
+  <li>ReStructured Text .rst</li>
+  <li>Executable Script .py</li>
+  <li>Reveal.js Slides .html</li>
+</ul>
+
+<p>To access to the export options click on “File” -&gt; “Export Notebook As” and select the desired format.</p>
+
+<h3 id="exporting-to-pdf-and-latex">Exporting to PDF and LaTeX</h3>
+
+<p>To export Notebooks to PDF and LaTeX formats you will a need couple of packages first. In particular, <code class="language-plaintext highlighter-rouge">pandoc</code>, <code class="language-plaintext highlighter-rouge">nbconvert</code> and <code class="language-plaintext highlighter-rouge">TeX</code>. The installation process for those packages will differ depending on your Operating System, i.e., whether you are running Linux, macOS, or Windows.</p>
+
+<p>Instructions to install <code class="language-plaintext highlighter-rouge">pandoc</code> can be found <a href="https://pandoc.org/installing.html">here</a></p>
+
+<p>Instructions to install <code class="language-plaintext highlighter-rouge">nbconvert</code> can be found <a href="https://nbconvert.readthedocs.io/en/latest/install.html">here</a></p>
+
+<p>Instructions to install <code class="language-plaintext highlighter-rouge">TeX</code> can be found <a href="https://nbconvert.readthedocs.io/en/latest/install.html#installing-tex">here</a></p>
+
+<h3 id="recommended-formart-to-export-and-share-with-others">Recommended formart to export and share with others</h3>
+
+<p>When I started using Jupyter and wanted to share a non-interactive version of my Notebook, my first instinct was to generate a PDF. Turns our, that since Notebooks are all JavaScript under the hood, it is pretty simple to generate a nice and consistent looking HTML file. Any person you send a HTML file will be able to open the file by just double clicking on it as long they have a browser, which every computer has.</p>
+
+<p>I highly recommend to export Notebooks to share in HTML format as they may save you a lot of pain trying to export Notebooks in PDF properly formatted.</p>
+
+<h2 id="running-notebooks-in-vscode">Running Notebooks in VSCode</h2>
+
+<p>VSCode is a free and open-source general purpose multi-platform (i.e., Linux, Windows, and macOS compatible) text IDE developed by Microsoft. Nowadays is one of the most popular IDEs and text-editors among programmers and data scientist.</p>
+
+<p>VSCode has recently incorporated the capacity to open <code class="language-plaintext highlighter-rouge">.ipybn</code> extension files, i.e., Notebooks, providing a Notebook-like interface. This is certainly a good alternative to try out if you are not fully comfortable with the web browser interface. I personally do not use it as I found out that rendering text, LaTeX formulas, and pictures is cleaner and easier in the browser interface.</p>
+
+<p>To install VSCode go to the <a href="https://code.visualstudio.com/">official website</a> and follow the installation instructions for your system.</p>
+
+<p><a href="https://code.visualstudio.com/docs/python/jupyter-support">Here</a> is the official VSCode guide to run Jupyter Notebooks within VSCode.</p>
+
+<h2 id="video-iv---exporting-and-vscode">Video IV - Exporting and VSCode</h2>
+
+<div class="embed-container">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-jzEB34a0RE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</div>
+
+<h2 id="notebooks-weaknesses">Notebooks weaknesses</h2>
+
+<p>Until this point, we have highlighted the many awesome capabilities of JupyterLab and Notebooks. However, Notebooks have a series of weaknesses to be mindful about and to consider, such that you can do two things:</p>
+
+<ol>
+  <li>Decide when is a good idea to use a Notebook</li>
+  <li>If you decide to use, to take the proper precautions to prevent problems</li>
+</ol>
+
+<p>Here is a brief list of issues that myself and others <a href="https://www.youtube.com/watch?v=7jiPeIFXb6U">on the Internet</a> have mentioned about Notebooks:</p>
+
+<ul>
+  <li>Out of order execution</li>
+  <li>Source control is hard</li>
+  <li>Dependency management is hard</li>
+  <li>Modularization is hard</li>
+  <li>Testing is hard</li>
+  <li>Code reviews are hard</li>
+  <li>Code is hard to extend</li>
+  <li>Refactoring code is hard</li>
+  <li>Maintaining code is hard</li>
+  <li>Code collaboration is hard</li>
+  <li>Encourage poor programming practices</li>
+</ul>
+
+<p>I will not delve into all of this topics in consideration of time and space, and because many of this issues are actually problematic for large scientific projects rather than for small data analysis or modeling procedures. I will focus in just three issues: <strong>out of order execution</strong>, <strong>modularization</strong>, and <strong>refactoring</strong> and <strong>debugging</strong>.</p>
+
+<h3 id="out-of-order-execution">Out of order execution</h3>
+
+<p>When you write code for an analysis, the code must run in the exact same sequence to yield the same results or to even run at all. Traditional code written in plain text-editors and then run in the terminal, will always do this by definition. Notebooks, on the other hand, make very easy to run cells out of order. It has happened to me dozens of times during the ~3 years I have been using Notebooks, and it is a common complaint on the Internet among data scientists.</p>
+
+<p>Most of the time, out of order execution will not matter that much. You will realize early and fix it. But once in a while, you may introduce a “bug” or mistake in your code than can cost you hours of detective work. That is the best case scenario. Worst case scenario, you never realize your mistake and your results will be wrong without you knowing it.</p>
+
+<p>For instance, imagine you have to run these three steps:</p>
+
+<ol>
+  <li>Get rid of NA in your data</li>
+  <li>Computer the weighted average of two variables</li>
+  <li>Create a new variable based on those two variables</li>
+</ol>
+
+<p>Several things may go wrong here. First, you may forgot to run the cell cleaning the NA values. Second, you may compute the average first, and run the cell to eliminate the NA values second.</p>
+
+<p>Although making such mistakes may sound unlikely, at least in mat experience, is not. Here is a typical scenario: you write the code for cleaning the NA and computing the average on different cells, so everything is nicely organized. Then you go for a coffee and get distracted. Then you come back to your computer, your cursor is on the cell to compute the average, so run that, and keep working. Afterwards, you may spend a good couple of hours writing and running more code, and writing analysis from your results, just to realize several hours later that you forgot to run the cell to clean the NA values. Too bad.</p>
+
+<p>Here is another one: you suddenly realize you made a mistake in the cell to clean the NA values. You go back, change the cell, and rerun the cell. But ops! you forgot to rerun the previous cell to reload the data into your Notebook, so now your cleaning process is mess up. You go back and rerun that cell. Then you get distracted with your dog barking. Then you go an run the average cell. You get distracted again with an email. Then you go back and remember to run the cell to clean the NA values. There you go: you ran the cells out of order. Again, this simply can’t happen with a script, since the script will rerun everything in order from top to bottom each time.</p>
+
+<p>Even though you may think that you focus is too good to make such mistakes, it is often the case that people get chronically distracted with working on computers with Internet access. <strong>So, be careful</strong>: if you really need to run long sequences of code, you may consider to switch to a text-file instead of a Notebook.</p>
+
+<h3 id="modularization-is-hard">Modularization is hard</h3>
+
+<p>When your code start to grow, a common recommended best practice is to divide your code into <strong>modules</strong>. This is simply having separate text-files with code to do <strong>one task</strong>. For instance, a large project may have scripts to: (1) load the data, (2) pre-process the data, (3) run descriptive statistics and plots, (4) run statistical models and generate the output.</p>
+
+<p>Doing all of this with Notebooks is not impossible, but hard. It is just way too easy to get trapped in the flow of writing everything in a single Notebook.</p>
+
+<h3 id="refactoring-and-debugging-is-hard">Refactoring and debugging is hard</h3>
+
+<p>Refactoring refers to the practice to rewrite and reorganize your code for readability and performance. Debugging refers to the exercise of searching for mistakes in your code.</p>
+
+<p><strong>When code modularization is hard, refactoring and debugging are hard</strong>. When code is modularized into single-purpose isolated scripts, it is relatively easy to focus in ways to rewrite such code to be clearer and faster to run. This is hard with Notebooks. Debugging code is also relatively easy when code is modularized, and refactored. If everything is dumped into a Notebook with 100 cells, finding where you made an error in your code can be a nightmare.</p>
+
+<h2 id="video-v---notebooks-weaknesses">Video V - Notebooks weaknesses</h2>
+
+<div class="embed-container">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/lMlN-2W1rxE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</div>
+
+<h2 id="when-to-use-notebooks">When to use Notebooks</h2>
+
+<p>The purpose of make Notebooks weaknesses visible, is to encourage you to think carefully about when to use Notebooks, and to take precautions.</p>
+
+<p>In my view, Notebooks are a good option, sometimes the best option, in the following scenarios:</p>
+
+<ul>
+  <li>Relatively short data analysis or modeling task</li>
+  <li>Task that rely more in the narrative than in the code itself, which is short</li>
+  <li>Task that are primarily about data visualization, as Notebooks can render plots and images easily</li>
+  <li>Tutorials and educational content</li>
+  <li>Analysis that entail lots of equations</li>
+  <li>Task that require relatively “small” or “medium” size datasets</li>
+  <li>Task that are heavily dependent on constant interaction with the results of running your code, i.e., highly interactive development</li>
+  <li>Prototyping code that will be eventually transfered to a script</li>
+</ul>
+
+<p>People differ in their appreciation of Notebooks. Only you and your experience using them can inform what is best for you.</p>
+
+<h2 id="basic-good-practices-to-work-with-notebooks">Basic good practices to work with Notebooks</h2>
+
+<p>Now that we covered Notebook weaknesses, it is a good idea to review a few “good” practices when working with Notebooks such that you can prevent as many mistakes as possible.</p>
+
+<p>My recommendations are mix of my own experience, things I have learned from other Notebook users, and <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007007#sec004">this article</a> about 10 rules to work with computational Notebooks.</p>
+
+<p>Here is the list:</p>
+
+<ol>
+  <li>Cells should do one task at the time</li>
+  <li>Document your coding process</li>
+  <li>Restart the Kernel and rerun all the cells often</li>
+  <li>Save and use version control often</li>
+  <li>Modularize your code as much as possible</li>
+  <li>Document your dependencies</li>
+  <li>Switch to a script if your Notebook grows too long</li>
+</ol>
+
+<h3 id="cells-should-do-one-task-at-the-time">Cells should do one task at the time</h3>
+
+<p>It is tempting to write code cells that run multiple lines of code and tasks all at once. This will probably make hard to read, document, and debug code cells if something goes wrong. Ideally, you want cells to do one task at the time. One task may involve multiple lines of code, but it is still one task.</p>
+
+<p>For instance, computing the mean between two list of integers is a perfectly fine task to have in one cell as:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">statistics</span> <span class="kn">import</span> <span class="n">mean</span> 
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list_a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">list_b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">list_c</span> <span class="o">=</span> <span class="n">list_a</span> <span class="o">+</span> <span class="n">list_b</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="nf">mean</span><span class="p">(</span><span class="n">list_c</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">mean of list-a + list-b = </span><span class="si">{</span><span class="n">mean</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mean of list-a + list-b = 3.5
+</code></pre></div></div>
+
+<p>Now, it is not always clear what “a task” entails. What if you define “the task” as computing descriptive statistics as the mean, median, and mode? Should all three go into a single cell or three separate cells? Since computing those is so simple, I would put everything in once cell, and move the print statements onto a separate cell as:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">statistics</span> <span class="kn">import</span> <span class="n">mean</span><span class="p">,</span> <span class="n">median</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list_a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">list_b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">list_c</span> <span class="o">=</span> <span class="n">list_a</span> <span class="o">+</span> <span class="n">list_b</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="nf">mean</span><span class="p">(</span><span class="n">list_c</span><span class="p">)</span>
+<span class="n">median</span> <span class="o">=</span> <span class="nf">median</span><span class="p">(</span><span class="n">list_c</span><span class="p">)</span>
+<span class="n">max_v</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">list_c</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">mean of list-a + list-b = </span><span class="si">{</span><span class="n">mean</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">median of list-a + list-b = </span><span class="si">{</span><span class="n">median</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">max value of list-a + list-b = </span><span class="si">{</span><span class="n">max_v</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mean of list-a + list-b = 3.5
+median of list-a + list-b = 3.5
+max value of list-a + list-b = 6
+</code></pre></div></div>
+
+<p>If instead of simple calculations, the task were to run several statistical models like Principal Component analysis and Logistic Regression, I would definitely separate everything.</p>
+
+<h3 id="document-your-coding-process">Document your coding process</h3>
+
+<p>Documenting code is a whole art in itself. Yet, there a few things you can implement right away to make code more reliable. Take the code from out previous example. There are two things we can do to improve upon it: (1) to use markdown cells to describe what are doing, (2) to add comments in along with the code.</p>
+
+<p>Now, for such a short and simple task is often recommended to not add in-line commentaries as the code is self-descriptive. However, I’ll add comments just for the sake of example.</p>
+
+<p>Something like:</p>
+
+<h4 id="descriptive-statistics">Descriptive statistics</h4>
+
+<p>Here we compute the mean, median, and max value for our lists.</p>
+
+<pre><code class="language-Python">list_a, list_b = [1, 2, 3],[4, 5, 6] # assign list to variables for further computation
+list_c = list_a + list_b # join list to compute descriptive stats 
+mean = mean(list_c) 
+median = median(list_c)
+max_v = max(list_c)
+</code></pre>
+
+<p>In general, you want to comment on the “why” instead of only the “what” of a line of code.</p>
+
+<h3 id="restart-the-kernel-and-rerun-all-the-cells-often">Restart the Kernel and rerun all the cells often</h3>
+
+<p>Just restarting your Kernel and rerun cells often it is a tremendously effective strategy to avoid the out-of-order execution problem. Since i started to do this the mistakes in my code where reduced dramatically. Quick and simple.</p>
+
+<h3 id="save-and-use-version-control-often">Save and use version control often</h3>
+
+<p>Although JupyterLab will constantly save your progress, clicking <code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">S</code> often and saving your progress in a remote version control system as Git/GitHub is a life saver for when things go wrong with Notebooks. Version control system is a topic in itself, but in short, it is a way to save copies of your work at different points in time in the cloud. Such “images” or “clones” of your work can be accessed and recovered easily in case you made some serious mistake in your code.</p>
+
+<h3 id="modularize-your-code-as-much-as-possible">Modularize your code as much as possible</h3>
+
+<p>True, I previously argued that modularization was hard in Notebooks. But hard does not mean equal impossible. As you become a more proficient coder, you will fine ways to refactor and modularize your code in manner that will make work with Notebooks more reliable and cleaner.</p>
+
+<h3 id="document-your-dependencies">Document your dependencies</h3>
+
+<p>Dependencies are all the software and libraries you used in your project. For instance, your software stack for a project may look as:</p>
+
+<ul>
+  <li>python==3.6.8</li>
+  <li>jupyterlab==2.0.1</li>
+  <li>numpy==1.18.2</li>
+  <li>pandas==1.0.3</li>
+  <li>pip==20.0.2</li>
+</ul>
+
+<p>Documenting that at the top of your Notebook is a good way to make clear to your future self and others potential users of your code, what are the requirements to reproduce your analysis.</p>
+
+<p>People have created utilities for that like <code class="language-plaintext highlighter-rouge">whatermark</code></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">load_ext</span> <span class="n">watermark</span>
+<span class="o">%</span><span class="n">watermark</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2020-06-11T15:58:30-05:00
+
+CPython 3.6.8
+IPython 7.15.0
+
+compiler   : GCC 7.5.0
+system     : Linux
+release    : 4.19.104-microsoft-standard
+machine    : x86_64
+processor  : x86_64
+CPU cores  : 16
+interpreter: 64bit
+</code></pre></div></div>
+
+<h3 id="switch-to-a-script-if-your-notebook-grows-too-long">Switch to a script if your Notebook grows too long</h3>
+
+<p>No matter how many precautions you take, you will reach a point where using Notebooks it is not the most functional alternative. You can insist on using a Notebook for large projects with many moving pieces, but you will probably start to experience the problems mentioned above. In such cases, a IDE like VSCode, Pycharm or Atom are probable your best option.</p>
+
+<h2 id="video-vi---when-to-use-notebooks-and-best-practices">Video VI - When to use Notebooks and Best Practices</h2>
+
+<div class="embed-container">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_M2rbm_zh50" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</div>
+
+<h2 id="final-jupyterlab-tips">Final JupyterLab Tips</h2>
+
+<p>Here a few additional final tips to use Notebooks effectively:</p>
+
+<ul>
+  <li><strong>Command Palette</strong>: if you do <code class="language-plaintext highlighter-rouge">Ctrl</code> + <code class="language-plaintext highlighter-rouge">Shift</code> + <code class="language-plaintext highlighter-rouge">C</code> you will have access to the Command Palette, which is a centralized command system to search and use all JupyterLab utilities.</li>
+  <li><strong>Create console for Notebooks</strong>: if you right-click onto a cell a select “New Console for Editor”, JupyterLab will open a Python interactive terminal at the bottom of the screen. Such instance shares the variables and information you have run already in your Notebook. It is a great way to try out code without having to change the Notebook, and to get richer output when running code.</li>
+  <li><strong>Use the Help menu</strong>: the “Help” tab at the top menu bar has the official documentation for JupyterLab which comes in handy when you are trying to learn something new or fix something does not work. Googling of course will always help, but sometimes answers to your questions will be outdated and plainly wrong.</li>
+</ul>
+
+<h2 id="resources-to-learn-more">Resources to learn more</h2>
+
+<p>Here you can find a list of resources to learn more about JupyterLab and become and effective user:</p>
+
+<ul>
+  <li><a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007007#sec004">Ten simple rules for writing and sharing computational analyses in Jupyter Notebooks</a></li>
+  <li><a href="https://jupyterlab.readthedocs.io/en/stable/index.html">Jupyterab official documentation</a></li>
+  <li><a href="https://www.youtube.com/watch?v=ctOM-Gza04Y">JupyterLab: The Next Generation Jupyter Web Interface</a></li>
+  <li><a href="https://www.youtube.com/watch?v=NSiPeoDpwuI">JupyterLab: The Evolution of the Jupyter Notebook</a></li>
+</ul>
+
+</article>
+
+      </section>
+    </div>
+  </div>
+
+   <footer>
+  <a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+    <span>
+        <b>Catbug88</b>
+    </span>
+    
+    <span>© 2025</span>
+  </a>
+</footer>
+
+  
+</body>
+
+</html>

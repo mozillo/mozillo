@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>The Perceptron - A Guided Tutorial Through Its History and Implementation In Python</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+  
+</head>
+
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>catbug88@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <a href="/archive"><h2 class="header-link">Archive</h2></a>
+<a href="/about"><h2 class="header-link">About</h2></a>
+
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        
+<!-- https://docs.mathjax.org/en/latest/configuration.html#local-config-files -->
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-AMS-MML_HTMLorMML,https://idcrook.github.io/assets/js/MathJaxLocal.js">
+</script>
+
+
+
+<article>
+	<h2>The Perceptron - A Guided Tutorial Through Its History and Implementation In Python</h2>
+	<time datetime="2020-02-27T00:00:00+08:00" class="by-line"
+		>27 Feb 2020</time
+	>
+	<iframe src="https://github.com/sponsors/pabloinsente/card" title="Sponsor pabloinsente" height="225" width="600" style="border: 0;"></iframe>
+
+<h2 id="learning-objectives">Learning objectives</h2>
+
+<ol>
+  <li>Understand the rationality and principles behind the creation of the perceptron</li>
+  <li>Identify the main elements of the perceptron architecture</li>
+  <li>Gain an intuitive understanding of the mathematics behind the perceptron</li>
+  <li>Develop a basic code implementation of the perceptron</li>
+  <li>Determine what kind of problems can and can’t be solved with the perceptron</li>
+</ol>
+
+<h2 id="historical-and-theoretical-background">Historical and theoretical background</h2>
+
+<p>The work of McCulloch and Pitts introduced one of the first biologically inspired models of cognition. This approach was powerful in so far it was able to emulate a wide variety of boolean functions by combining simple binary computational units. However, the architecture lacked several characteristics of biological networks: complex connectivity patterns, processing of continuous values (rather than just binary), and critically, a learning procedure. Further, the fact that brain activity tends to be noisy and seemingly stochastic did not fit well with the consistency and predictability required by the McCulloch and Pitts model to work.</p>
+
+<p>With an eye in all the aforementioned limitations of the early neural network models, Frank Rosenblatt introduced the so-called “perceptron” in 1958. Rosenblatt contextualized his model in the broader discussion about the nature of the cognitive skills of higher-order organisms. On Rosenblatt’s (1958) view, three fundamental questions must be answered to understand this phenomenon, which can be summarized as the problems of (1) <em>detection</em>, (2) <em>storage</em>, and (3) the <em>effect of the stored information</em> in further perceptual and behavioral processes.</p>
+
+<p>Rosenblatt delegated the first question to the discipline of sensory physiology, concentrating his attention in the last two. Next, we will examine these problems one by one.</p>
+
+<h3 id="the-information-storage-problem">The information storage problem</h3>
+
+<p>When your brain forms a memory about something, what shape does it take? If brains stored information as computers do, the answer would be straightforward: as patterns of zeros and ones. Unfortunately, figuring this out is not as simple as with human artifacts like digital computers.</p>
+
+<p>According to Rosenblatt, at the time (and I’d argue, to a certain extent today too) they were two approaches to the information storage problem: the <em>coded representations</em> approach and the <em>connectionist</em> approach. The former postulates that sensory information is stored in the form of <em>coded representations</em> or images, with some sort of one-to-one mapping between the sensory stimulus and the stored pattern. As an analogy, think about those shape-matching toys for kids. Let’s say you perceived a triangle, then, a triangle-shaped hole would be “carved” in the memory space of your metaphorical “board-brain”. <strong>Figure 1</strong> shows an example of this process. Once the shape is carved, you would be able to precisely retrieve the information stored in a particular location in the brain, in the same manner, that you can know that a triangle goes in a particular hole in a shape-matching toy just by looking at it. In the brain, this “carved shape” takes the form of precise patterns of connectivity between groups of neurons. So precise, that you should be able to tell the contents encoded in an arrangement of neurons just by looking at how they are wired together. If you think about it, this is the notion that most science fiction movies implicitly adopt: every attempt to “transfer” the contents of the mind into a machine and vice-versa, presumes that such contents are coded in a way so precise that makes them easily identifiable and transferable.</p>
+
+<p>The connectionist approach takes a radically different perspective: there is no such thing as “records” or “images” of any kind in the brain.  When you perceive a triangle, no memory of a triangle is “imprinted” in the brain. “That is nonsense”  you may be thinking “How could I be able to remember the shape of a triangle if there is no ‘image’ of a triangle imprinted in my bran?”. That is a fair question. According to Rosenblatt, the key is that memories are stored as preferences for a particular “response” rather than “topographic representations”.  By “response”, Rosenblatt meant the electrochemical activity of any group of associated neurons, as well as any behavioral response of the organism as a whole.</p>
+
+<p>Think about it in this manner: there is no unique cluster of neurons, wired in an invariant manner, that “code” the memory of a triangle. What we have instead, is a series of associations among an unprecise set of neurons, that -importantly- “tend to react” in the presence of any stimulus that looks like a triangle. It does not even need to be exactly a triangle: any shape somewhat similar may trigger at least a partial reaction in those neurons (and maybe in a few more or less too). Going back to the shape-matching toy analogy, the coded representation approach needs a perfectly crafted wood board to work, very rigid, where each shape has a corresponding hole in the board; whereas the connectionist approach is more of a collection of Play-Doh balls, where each ball can be roughly molded to match shapes that look roughly similar. This means that if you were trying to guess what kind of shapes can be molded by a particular ball of Play-Doh, you may at best get an answer like “stuff with a couple of pointy edges”. Of course, this is a very imprecise analogy intended to capture the idea that there aren’t perfectly crafted “blueprints” of perceived stimulus in the brain, but partial and flexible activity patterns loosely related to a certain type of stimulus. Importantly, such associations between stimulus and response patterns are stable enough for learning and recognition to work.</p>
+
+<p><strong>Figure 1</strong></p>
+
+<p><img src="/assets/post-5/code-theory-memory.png" width="600" height="YYY" /></p>
+
+<h3 id="the-effect-of-the-stored-information-in-further-perceptual-and-behavioral-processes">The effect of the stored information in further perceptual and behavioral processes</h3>
+
+<p>Once memories have been stored in the brain (in whichever way you think it is more appropriate) now we have the question of how such information impacts further perceptual processes and behavioral responses. In other words, once I learned about the triangle shape, how does having such representation in my brain already impact my reaction to it? Note that by “reaction” we mean anything and everything: from unconscious mental processes to any kind of behavioral response.</p>
+
+<p>By construction, the coded representation perspective entails two separate processes: stimulus-recognition (“yes, I’ve seen this before”) and stimulus-response (“how do I react now”).  You first need to match the new triangle to the carved triangle shape in your memory-board, and just then you can determine how to react to that. Since the connectivity pattern of neurons is <em>unique</em> to each stimulus, you <em>necessarily</em> have to use a <em>different</em> set of connected neurons to trigger a reaction to the stimulus. Something like a “ recognition module” and separate “response module”. From a connectionist perspective, the stimulus-recognition and stimulus-response get <em>blended into one</em>. Remember that in this view information is stored as associated patterns of neural activity, this is to say, like <em>stimulus-responses</em>. It follows that the reaction to the new stimulus will use, at least partially, the same activity patterns that stored the information in the first place. No independent recognition and response modules are needed. This will hopefully become more clear when we implement the model in an example.</p>
+
+<h3 id="the-foundational-principles-of-the-perceptron">The foundational principles of the perceptron</h3>
+
+<p>To build his model, Rosenblatt took advantage of the advances in research about the fundamental properties of the nervous system at the time. In particular, he took elements from the works of <a href="https://en.wikipedia.org/wiki/Donald_O._Hebb">Donald O. Hebb</a>, <a href="https://en.wikipedia.org/wiki/Friedrich_Hayek">Friedrich Hayek</a>, <a href="https://en.wikipedia.org/wiki/Albert_Uttley">Albert Uttley</a>, and <a href="https://en.wikipedia.org/wiki/W._Ross_Ashby">W. Ross Ashby</a>. Rosenblatt (1958) summarized these principles as follow:</p>
+<ol>
+  <li>The physical connections participating in learning and recognizing a stimulus can vary from organism to organism.</li>
+  <li>The cells involved in learning and recognition are flexible, meaning that the probability of activation, when exposed to a stimulus, can change over time.</li>
+  <li>Similar stimuli will tend to trigger similar response patterns in the brain.</li>
+  <li>When memory is forming, the application of a positive and/or a negative reinforcement may facilitate or hinder the process.</li>
+  <li><em>Similarity</em> is not determined by the perceptual properties of the stimuli, but by a combination of the perceiving system, the stimuli, the context, and the history of interactions between those elements. This last principle indicates that you can’t decouple perception and representation from the perceiving system (the organism itself).</li>
+</ol>
+
+<p>In sum, if you pay close attention to these principles, you may start to see how they fit with the more general perspective about stimulus learning and recognition introduced in previous sections.</p>
+
+<h3 id="the-organization-of-a-perceptron">The organization of a perceptron</h3>
+
+<p>The first exemplar of a perceptron offered by Rosenblatt was the so-called “photo-perceptron”, that intended to emulate the functionality of the eye. Rosenblatt would make further improvements to the perceptron architecture, by adding a more general learning procedure and expanding the scope of problems approachable by this model. Here, we will examine the structure and functionality of the photo-perceptron, leaving a more extensive examination of later iterations of the perceptron for the next section.</p>
+
+<p>In contemporary neural network jargon, we could classify the perceptron as a partially connected three-layer neural network with two hidden layers and threshold activation units, but such terminology was not adopted until much later. The structure of a photo-perceptron, represented in <strong>Figure 2</strong>, can be summarized as follows:</p>
+<ol>
+  <li>Stimuli “hits” the retina sensory units (S-points) generating a binary response. Graded responses (instead of binary) are allowed in the perceptron, but Rosenblatt avoided such complications on his prototype. In modern jargon, this is the “input layer”.</li>
+  <li>The responding sensory units send the signal to a cluster of “association cells” (A-units) in the “projection area” ($A_I$). Nowadays, we would call such a projection area the first “hidden layer”.</li>
+  <li>The association cells will fire, if and only if, the weighted sum of inputs coming from the connected sensory units surpasses a predetermined threshold value ($\theta$).  Signals can be either <em>excitatory</em> or <em>inhibitory</em>.</li>
+  <li>The “projection area” ($A_I$) send signals to the “association area” ($A_{II}$) <em>randomly</em>. This means that connections between both areas are set at random. Why random? Because this is more similar to what is observed in actual biological neurons. Units in this area will fire following the same rules that $A_I$ units.</li>
+  <li>The last section is called the “response area”, and contains a set of units that are activated in the same fashion that units in $A_I$ and $A_{II}$ areas. The response area receives signals, also at random, from the $A_{II}$ activated units. This time, connections between $A_{II}$ and the response area are <em>bidirectional</em>, generating a feedback signal from the response area to $A_{II}$. The response area is what we today will call the “output layer”.</li>
+</ol>
+
+<p><strong>Figure 2</strong></p>
+
+<p><img src="/assets/post-5/photo-perceptron.png" width="600" height="YYY" /></p>
+
+<p>The “feedback signals” between the response-units and the association-units are crucial because such signals are the ones allowing the network to <em>learn and self-organize</em>. Feedback can work in two manners:</p>
+<ol>
+  <li>The response units send an <em>excitatory signal</em> to the association area units connected to such units</li>
+  <li>The response units send an <em>inhibitory signal</em> to the associated area units not connected to such units</li>
+</ol>
+
+<p>The first mechanism reinforces signals that contribute to the activation of a response unit. The second mechanism suppresses the signals that do not contribute to the activation of the same response unit. In either case, the goal is to build an association between the triplet of stimulus, association-unit activation, and response-unit activation. In other words, a pattern association mechanism. Rosenblatt provided a very detailed analysis of the properties of several variants of this system, but for our purposes, the key is to understand the following:</p>
+
+<ol>
+  <li>Repeated exposure to stimulus A, will tend to activate a subset of units in the association area.</li>
+  <li>Repeated activation of a subset of units in the association area, will tend to trigger the response of some units in the response area.</li>
+  <li>The response units that react more often, will send feedback reinforcing the association between their input units in the association area, and its activation.</li>
+  <li>After repeating this cycle several times, such association will grow stronger, until the network will “learn” to fire a unique response when exposed to stimulus A. Then, the stimulus-response association has been created.</li>
+</ol>
+
+<p>This feedback-based learning process is a variant (not an exact implementation) of the so-called “Hebbian learning” mechanism (Hebb, 1949): <em>neurons that fire together, wire together</em>.</p>
+
+<p>At this point, there is a crucial aspect to remark about the photo-perceptron architecture: the <em>same</em> units that trigger the response of a unit A can contribute to triggering the response of unit B. This is relevant as it reveals the fact that <em>different stimulus</em> can be represented by <em>overlapping neural activity</em>. This idea of representations sharing brain topology and functionality is one of the core principles in neural network approaches in cognitive science. <strong>Figure 3</strong> shows a simplified example where two output units share a proportion of their source units.</p>
+
+<p><strong>Figure 3</strong></p>
+
+<p><img src="/assets/post-5/photo-perceptron-overlap.png" width="600" height="YYY" /></p>
+
+<h3 id="the-general-purpose-perceptron-trained-by-error-correction">The general purpose perceptron trained by error-correction</h3>
+
+<p>The version of the perceptron that is today most widely recognized as “the perceptron”, differs from the original photo-perceptron in a few important ways:</p>
+<ol>
+  <li>the layers (“unit areas” in the photo-perceptron) are fully connected, instead of partially connected at random.</li>
+  <li>the inputs and outputs can be real-valued numbers, instead of only binary values.</li>
+  <li>linear functions are used for the units in the intermediate layers (if any) rather than threshold functions.</li>
+  <li>it implements an error-based learning algorithm instead of the pattern association mechanism of the photo-perceptron.</li>
+</ol>
+
+<p><strong>Figure 4</strong> displays a graphical representation of this version of the perceptron. In this depiction, is assumed that each area contains three units that are fully connected, with the flow of information moving forward.</p>
+
+<p><strong>Figure 4</strong></p>
+
+<p><img src="/assets/post-5/perceptron.png" width="600" height="YYY" /></p>
+
+<p>If you open a random textbook or article about the perceptron, the above description is the one you will most likely find. I am mentioning this because is important to emphasize that the perceptron is a more general concept than any particular instantiation of it. Both, the photo-perceptron and the general-purpose perceptron are special cases of the more general learning and recognition system envisioned by Rosenblatt. Nonetheless, the version we are reviewing here is indeed more general than the photo-perceptron. By general, I  mean that it was designed with a wider variety of problems in mind, rather than to emulate the function of the eye like the photo-perceptron.</p>
+
+<p>Nonetheless, the perceptron has been used primarily to solve <strong>classification problems</strong>. A classification problem is any situation where you have a set of classes, for instance, geometrical shapes, like triangles and squares, and you want to build a network to make predictions based on values describing characteristics of the object at hand. For example, you may have a pair of values describing the height and width of an object, and based on that, the network should be able to classify the object in the proper class. In contemporary machine learning jargon, the values describing the objects are usually called “features” or “variables”, and the label that you want to predict, “target” or “class”.</p>
+
+<h3 id="why-and-how-the-perceptron-works">Why and how the perceptron works</h3>
+
+<p>The way on which a perceptron trained by error-correction achieves its goal is by <em>iteratively adjusting its weights values</em> (i.e., the value of the links connecting inputs and association units), until it finds a set of weights that allow for the separation of classes in the set. To properly understand how the perceptron self-adjust and find “good weights” we first have to understand the mathematical formalism and learning algorithm behind it. Hence, we will defer a thorough explanation for the “Perceptron convergence” section.</p>
+
+<h2 id="mathematical-formalization">Mathematical formalization</h2>
+
+<p>Mathematically, the perceptron can be described by:</p>
+<ul>
+  <li>a <em>linear function</em> that aggregates the input signals</li>
+  <li>a <em>threshold function</em> that determines if the response neuron fires or not</li>
+  <li>a <em>learning procedure</em> to adjust connection weights</li>
+</ul>
+
+<p>We will examine each of these pieces one by one.</p>
+
+<h3 id="linear-aggregation-function">Linear aggregation function</h3>
+
+<p>The linear function that aggregates the input signals for a single neuron or processing unit is defined as:</p>
+
+\[z=b+\sum_{i=1}^nw_ix_i=w_0x_0+w_1 x_1+...+w_nx_n\]
+
+<p>The $z$ output is used as input for the threshold function $f(z)$. The $b$ constant added at the beginning, the <em>bias term</em>, is a way to simplify learning a good threshold value for the network. Consider the original threshold function, which compares the weighted sum of inputs to a threshold $\theta$:</p>
+
+\[z=\sum_iw_ix_i\geq\theta\]
+
+<p>Now, if we subtract $\theta$ from both sides we obtain:</p>
+
+\[z=\sum_iw_ix_i-\theta\geq\theta - \theta\]
+
+<p>then:</p>
+
+\[z=\sum_iw_ix_i-\theta\geq0\]
+
+<p>Finally, we can replace $-\theta$ with $b$ to indicate “bias”, move the $b$ to the front, and we obtain:</p>
+
+\[z=b+\sum_iw_ix_i\geq0\]
+
+<p>Now, the weight for $b$ can be learned along with the weights for the input values. If you omit this “bias term”, the perceptron won’t be able to learn solutions that don not pass by the origin in $R$ dimensional space. If this does not make sense for you now, worry not. Hopefully, this will become clearer once we review the learning procedure.</p>
+
+<h3 id="threshold-decision-function">Threshold decision function</h3>
+
+<p>The threshold function for the perceptron is defined as:</p>
+
+\[\hat{y}=f(z)
+\begin{cases}
++1, &amp;\text{if z&gt;0}\\
+-1, &amp;\text{otherwise}
+\end{cases}\]
+
+<p>where $z$ is the output of the linear aggregation function.</p>
+
+<h3 id="learning-procedure">Learning procedure</h3>
+
+<p>Here we describe what Rosenblatt (1961) defined as an <em>error-corrective reinforcement</em> learning procedure. This was the version analyzed by Minsky and Papert, which probably explains why it was popularized as the standard perceptron. In his 1961 report, “Principles of Neurodynamics”, Rosenblatt describes several reinforcement procedures, like monopolar reinforcement, bipolar reinforcement, gamma reinforcement, and others. The most surprising fact about this learning procedure is that is <strong>guaranteed to find a set of weights that will produce the right answer for every example, as long such a set of weights exists</strong>. Of course, the problem is that for most interesting problems in cognitive science such a set of weights does not exist.  When a classification problem consists of “linearly separable” training cases, the set of weights exist, otherwise, it does not. We will learn about this later.</p>
+
+<p>The error-corrective learning rule is as follow:</p>
+<ul>
+  <li>compute the mismatch between the <em>obtained value</em> and the <em>expected value</em> for the training exemplar</li>
+  <li>if the obtained and expected values match, do nothing</li>
+  <li>if the obtained and expected values do not match, compute the difference or delta between those values</li>
+  <li>then, use a portion of that value to update the weights of the network</li>
+</ul>
+
+<p>This can be expressed as:</p>
+
+\[w_{k+1} = w_k + \Delta w_k\]
+
+<p>The $\Delta w_k$ is computed as:</p>
+
+\[\Delta w_k = \eta(y - \hat{y})x_k\]
+
+<p>where:</p>
+<ul>
+  <li>$w_k$ is the weight for case $k$</li>
+  <li>$\eta$ is the learning rate (0 -1 value)</li>
+  <li>$y$ is the actual value (“true class”)</li>
+  <li>$\hat{y}$ is the predicted value (“predicted class”)</li>
+  <li>$x_k$ is the vector of inputs for case $k$</li>
+</ul>
+
+<p><strong>Note about the learning rate $\eta$</strong>: the learning rate has the role of facilitating the training process by weighting the delta used to update the weights. This basically means that instead of completely replacing the previous weight with the sum of the weight + $\Delta$, we incorporate a <strong>proportion</strong> of the error into the updating process. This makes the learning process more stable over time.</p>
+
+<p><strong>Figure 5</strong> shows an schematic representation of the perceptron with the learning procedure.</p>
+
+<p><strong>Figure 5</strong></p>
+
+<p><img src="/assets/post-5/perceptron-math.png" width="600" height="YYY" /></p>
+
+<h3 id="perceptron-convergence">Perceptron convergence</h3>
+
+<p>The proof that the perceptron will find a set of weights to solve any linearly separable classification problem is known as the <a href="https://www.cs.princeton.edu/~tcm3/docs/mapl_2017.pdf"><em>perceptron convergence theorem</em></a>. I will not develop such proof, because involves some advance mathematics beyond what I want to touch in an introductory text. If you are interested in the proof, see Chapter 4.2 of Rojas (1996) or Chapter 3.5 of Bishop (1995).</p>
+
+<p>Nonetheless, we can offer some geometrical intuition of why the perceptron works. Consider a problem with two classes, let’s say, albatross and owls. For each bird, we have measurements of their wingspan and weight. <strong>Figure 6</strong> plots the hypothetical data in a cartesian plane with <em>weight</em> in the horizontal axis and <em>wingspan</em> in the vertical axis.</p>
+
+<p><strong>Figure 6</strong></p>
+
+<p><img src="/assets/post-5/linear-sep-ex.png" width="600" height="YYY" /></p>
+
+<p>From this example, is clear that we can trace a straight line to separate bird species: everything on the left of the dashed line can be classified as an owl, whereas everything at the right as an albatross. This is possible because our sample of owls and albatross are different enough in weight and wingspan that they can be separated using an straight line. Such line is usually called “decision boundary” in machine learning problems.</p>
+
+<p>In two dimensions is easy to visualize a decision boundary, but this can be extended to higher-dimensional problems, with 3, 4 or any number of dimensions, where visualization becomes tricky. Some people say that mathematicians have this trick where they visualize a 3-dimensional space first, then add, let’s say, 5 more dimensions, and then shout in their minds “8 dimensions!” until they convince themselves they can see it.</p>
+
+<p>In any case, in higher-dimensional spaces, the decision-boundary is usually called a <a href="https://en.wikipedia.org/wiki/Hyperplane">“hyperplane”</a>. The trick now is to find that hyperplane. Mathematically, the solution for a linear classification problem (i.e., to find the hyperplane) is defined as:</p>
+
+\[w_1x_1+w_2x_2+...+w_nx_n+b = 0\]
+
+<p>The left side of the equation is identical to our definition for the linear aggregation function, which makes sense since the output of the perceptron is determined by this weighted sum.</p>
+
+<p>An algebraic way to express the same idea is that there must be a set of weights that <em>simultaneously satisfy these two inequalities</em>:</p>
+
+<p>$w_1x_1+w_2x_2+…+w_nx_n+b &gt; 0,$ for each input vector belonging to class 1 (albatross)</p>
+
+<p>$w_1x_1+w_2x_2+…+w_nx_n+b \leq 0,$ for each input vector belonging to class -1 (owls)</p>
+
+<p>In vector notation, the above expression is equivalent to:</p>
+
+<p>$w^Tx+b&gt;0, \forall \in {1}$</p>
+
+<p>$w^Tx+b\leq 0, \forall \in {-1}$</p>
+
+<p>By now you may be wondering “What if the examples are not linearly separable? What if I am comparing owls and falcons? Those are very similar. I bet that doesn’t work!” And you will be correct. This is what is known as the “linear separability constrain”. I will introduce a case where the perceptron works first and then extend on this limitation later.</p>
+
+<h2 id="code-implementation">Code implementation</h2>
+
+<p>We will implement the perceptron algorithm from scratch with <code class="language-plaintext highlighter-rouge">python</code> and <code class="language-plaintext highlighter-rouge">numpy</code>. The goal is to understand the perceptron step-by-step execution rather than achieving an elegant implementation. I’ll break down each step into functions to ensemble everything at the end.</p>
+
+<p>The <a href="https://scikit-learn.org/stable/">scikit-learn</a> (a <code class="language-plaintext highlighter-rouge">python</code> library for machine learning) implementation can be found <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Perceptron.html">here</a>. In general, we don’t want to re-implemented algorithms that have been thoroughly tested by others, to avoid duplication of work an potential errors in our code. The reason I’m not using sckit-learn to implement the perceptron is that it won’t give us any insight about what is going on at the algorithmic level, and I believe that this exercise has pedagogical value. Note I will use <a href="https://en.wikipedia.org/wiki/Matrix_(mathematics)">matrix notation</a> instead of <a href="http://www.columbia.edu/itc/sipa/math/summation.html">summation notation</a> because is the way on which <code class="language-plaintext highlighter-rouge">numpy</code> works, but keep in mind that both are equivalent.</p>
+
+<h3 id="generate-random-weights-vector">Generate random weights vector</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="k">def</span> <span class="nf">random_weights</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="sh">'''</span><span class="s">create vector of random weights
+    Parameters
+    ----------
+    X: 2-dimensional array, shape = [n_samples, n_features]
+    Returns
+    -------
+    w: array, shape = [w_bias + n_features]</span><span class="sh">'''</span>
+    <span class="n">rand</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nc">RandomState</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">rand</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span> <span class="o">+</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">w</span>
+</code></pre></div></div>
+
+<p>Predictions from the perceptron are obtained by a <a href="https://en.wikipedia.org/wiki/Linear_combination">linear combination</a> of features and weights. This is the output of the linear aggregation function. It is common practice to begin with a vector of small random weights that would be updated later by the perceptron learning rule.</p>
+
+<h3 id="compute-net-input-linear-aggregation-function">Compute net input: linear aggregation function</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">net_input</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+    <span class="sh">'''</span><span class="s">Compute net input as dot product</span><span class="sh">'''</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="nf">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">+</span> <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>Here we pass the feature matrix and the previously generated vector of random weights to compute their inner product. Remember that we need to add a weight-value for the bias term at the beginning of the vector (<code class="language-plaintext highlighter-rouge">w[0]</code>)</p>
+
+<h3 id="compute-predictions-threshold-function">Compute predictions: threshold function</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+    <span class="sh">'''</span><span class="s">Return class label after unit step</span><span class="sh">'''</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="nf">net_input</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This method implements the threshold function that takes the net-value of the inner product and outputs a 1 if the predicted value is &gt;= 0, and -1 otherwise.</p>
+
+<h3 id="training-loop---learning-rule">Training loop - Learning rule</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="sh">'''</span><span class="s">loop over exemplars and update weights</span><span class="sh">'''</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="nf">random_weights</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">exemplar</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n_iter</span><span class="p">):</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">xi</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="nf">predict</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
+            <span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+=</span> <span class="n">delta</span> <span class="o">*</span> <span class="n">xi</span>
+            <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">delta</span>
+            <span class="n">error</span> <span class="o">+=</span> <span class="nf">int</span><span class="p">(</span><span class="n">delta</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="n">errors</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">w</span><span class="p">,</span> <span class="n">errors</span>
+</code></pre></div></div>
+
+<p>Let’s examine the fit method that implements the learning rule:</p>
+
+<ul>
+  <li>create a vector of random weights by using the <code class="language-plaintext highlighter-rouge">random_weights</code> function with dimensionality equal to the number of columns in the feature matrix.</li>
+  <li>loop over each row of the feature matrix with <code class="language-plaintext highlighter-rouge">for exemplar in range(n_iter)</code></li>
+  <li>compute the inner product between the feature vector for row $i$ and the weight vector by using the <code class="language-plaintext highlighter-rouge">predict(xi, w)</code> function</li>
+  <li>compute the difference between the predicted value and the target value times the learning rate with <code class="language-plaintext highlighter-rouge">delta = eta * (target - predict(xi, w))</code></li>
+  <li>update the weights by <code class="language-plaintext highlighter-rouge">w[1:] += delta * xi</code> and <code class="language-plaintext highlighter-rouge">w[0] += delta</code></li>
+  <li>we also save the errors for further plotting <code class="language-plaintext highlighter-rouge">errors.append(error)</code></li>
+</ul>
+
+<h2 id="application-classification-using-the-perceptron">Application: classification using the perceptron</h2>
+
+<p>We will test the perceptron by creating a simple example: <strong>classifying birds by their weight and wingspan</strong>. I will create a synthetic dataset with two species: <em>Wandering Albatross</em> and <em>Great Horned Owl</em>.</p>
+
+<p>If you are wondering how realistic is this classification problem from a psychological perspective, the answer is that it is not. Humans would rarely use only two traits of an animal to make a classification. When categorizing species by their visual features, you would probably consider a high number of features: wingspan, height, color, distance from the beak to the tail, etc. The reason we use this highly simplified example is for the sake of transparency and clarity: we can plot and visualize problems in 2-dimensions. That being said, everything explored here does extend to more realistic scenarios in higher-dimensions (i.e., more features).</p>
+
+<h3 id="generate-dataset">Generate dataset</h3>
+
+<p>Let’s first create a function to generate our synthetic data</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">species_generator</span><span class="p">(</span><span class="n">mu1</span><span class="p">,</span> <span class="n">sigma1</span><span class="p">,</span> <span class="n">mu2</span><span class="p">,</span> <span class="n">sigma2</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">seed</span><span class="p">):</span>
+    <span class="sh">'''</span><span class="s">creates [n_samples, 2] array
+    
+    Parameters
+    ----------
+    mu1, sigma1: int, shape = [n_samples, 2]
+        mean feature-1, standar-dev feature-1
+    mu2, sigma2: int, shape = [n_samples, 2]
+        mean feature-2, standar-dev feature-2
+    n_samples: int, shape= [n_samples, 1]
+        number of sample cases
+    target: int, shape = [1]
+        target value
+    seed: int
+        random seed for reproducibility
+    
+    Return
+    ------
+    X: ndim-array, shape = [n_samples, 2]
+        matrix of feature vectors
+    y: 1d-vector, shape = [n_samples, 1]
+        target vector
+    ------
+    X</span><span class="sh">'''</span>
+    <span class="n">rand</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nc">RandomState</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">f1</span> <span class="o">=</span> <span class="n">rand</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">mu1</span><span class="p">,</span> <span class="n">sigma1</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>
+    <span class="n">f2</span> <span class="o">=</span> <span class="n">rand</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="n">mu2</span><span class="p">,</span> <span class="n">sigma2</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">])</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="nf">transpose</span><span class="p">()</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">full</span><span class="p">((</span><span class="n">n_samples</span><span class="p">),</span> <span class="n">target</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
+</code></pre></div></div>
+
+<p>According to Wikipedia, the <a href="https://en.wikipedia.org/wiki/Wandering_albatross">wandering albatross</a> mean weight is around 9kg (19.8lbs), and their mean wingspan is around 3m (9.8ft). I will generate a random sample of 100 albatross with the indicated mean values plus some variance.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">albatross_weight_mean</span> <span class="o">=</span> <span class="mi">9000</span> <span class="c1"># in grams
+</span><span class="n">albatross_weight_variance</span> <span class="o">=</span>  <span class="mi">800</span> <span class="c1"># in grams
+</span><span class="n">albatross_wingspan_mean</span> <span class="o">=</span> <span class="mi">300</span> <span class="c1"># in cm
+</span><span class="n">albatross_wingspan_variance</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1"># in cm 
+</span><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">target</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># aX: feature matrix (weight, wingspan)
+# ay: target value (1)
+</span><span class="n">aX</span><span class="p">,</span> <span class="n">ay</span> <span class="o">=</span> <span class="nf">species_generator</span><span class="p">(</span><span class="n">albatross_weight_mean</span><span class="p">,</span> <span class="n">albatross_weight_variance</span><span class="p">,</span>
+                           <span class="n">albatross_wingspan_mean</span><span class="p">,</span> <span class="n">albatross_wingspan_variance</span><span class="p">,</span>
+                           <span class="n">n_samples</span><span class="p">,</span><span class="n">target</span><span class="p">,</span><span class="n">seed</span> <span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="n">albatross_dic</span> <span class="o">=</span> <span class="p">{</span><span class="sh">'</span><span class="s">weight-(gm)</span><span class="sh">'</span><span class="p">:</span> <span class="n">aX</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span>
+                 <span class="sh">'</span><span class="s">wingspan-(cm)</span><span class="sh">'</span><span class="p">:</span> <span class="n">aX</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> 
+                 <span class="sh">'</span><span class="s">species</span><span class="sh">'</span><span class="p">:</span> <span class="n">ay</span><span class="p">,</span>
+                 <span class="sh">'</span><span class="s">url</span><span class="sh">'</span><span class="p">:</span> <span class="sh">"</span><span class="s">https://raw.githubusercontent.com/pabloinsente/nn-mod-cog/master/notebooks/images/albatross.png</span><span class="sh">"</span><span class="p">}</span>
+
+<span class="c1"># put values in a relational table (pandas dataframe)
+</span><span class="n">albatross_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">albatross_dic</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>According to Wikipedia, the <a href="https://en.wikipedia.org/wiki/Great_horned_owl">great horned owl</a> mean weight is around 1.2kg (2.7lbs), and its mean wingspan is around 1.2m (3.9ft). Again, I will generate a random sample of 100 owls with the indicated mean values plus some variance.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">owl_weight_mean</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># in grams
+</span><span class="n">owl_weight_variance</span> <span class="o">=</span>  <span class="mi">200</span> <span class="c1"># in grams
+</span><span class="n">owl_wingspan_mean</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># in cm
+</span><span class="n">owl_wingspan_variance</span> <span class="o">=</span> <span class="mi">15</span> <span class="c1"># in cm
+</span><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">target</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># oX: feature matrix (weight, wingspan)
+# oy: target value (1)
+</span><span class="n">oX</span><span class="p">,</span> <span class="n">oy</span> <span class="o">=</span> <span class="nf">species_generator</span><span class="p">(</span><span class="n">owl_weight_mean</span><span class="p">,</span> <span class="n">owl_weight_variance</span><span class="p">,</span>
+                           <span class="n">owl_wingspan_mean</span><span class="p">,</span> <span class="n">owl_wingspan_variance</span><span class="p">,</span>
+                           <span class="n">n_samples</span><span class="p">,</span><span class="n">target</span><span class="p">,</span><span class="n">seed</span> <span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">owl_dic</span> <span class="o">=</span> <span class="p">{</span><span class="sh">'</span><span class="s">weight-(gm)</span><span class="sh">'</span><span class="p">:</span> <span class="n">oX</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span>
+             <span class="sh">'</span><span class="s">wingspan-(cm)</span><span class="sh">'</span><span class="p">:</span> <span class="n">oX</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> 
+             <span class="sh">'</span><span class="s">species</span><span class="sh">'</span><span class="p">:</span> <span class="n">oy</span><span class="p">,</span>
+             <span class="sh">'</span><span class="s">url</span><span class="sh">'</span><span class="p">:</span> <span class="sh">"</span><span class="s">https://raw.githubusercontent.com/pabloinsente/nn-mod-cog/master/notebooks/images/owl.png</span><span class="sh">"</span><span class="p">}</span>
+
+<span class="c1"># put values in a relational table (pandas dataframe)
+</span><span class="n">owl_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">owl_dic</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Now, we concatenate the datasets into a single dataframe.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">albatross_df</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">owl_df</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="plot-synthetic-dataset">Plot synthetic dataset</h3>
+
+<p>To appreciate the difference in weight and wingspan between albatross and eagles, we can generate a 2-D chart.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">altair</span> <span class="k">as</span> <span class="n">alt</span>
+
+<span class="n">alt</span><span class="p">.</span><span class="nc">Chart</span><span class="p">(</span><span class="n">df</span><span class="p">).</span><span class="nf">mark_image</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">20</span>
+<span class="p">).</span><span class="nf">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="sh">"</span><span class="s">weight-(gm)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="sh">"</span><span class="s">wingspan-(cm)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">url</span><span class="o">=</span><span class="sh">"</span><span class="s">url</span><span class="sh">"</span>
+<span class="p">).</span><span class="nf">properties</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="sh">'</span><span class="s">Chart 1</span><span class="sh">'</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Chart 1</strong></p>
+
+<p><img src="/assets/post-5/chart1.png" width="600" height="YYY" /></p>
+
+<p>From <strong>Chart 1</strong> is clear that the albatross is considerably larger than the owls, therefore the perceptron should be able to find a plane to separate the data relatively fast.</p>
+
+<h3 id="perceptron-training">Perceptron training</h3>
+
+<p>We have all pieces in place to test the perceptron. Before passing the data by the perceptron, we will shuffle the rows in the dataset. This is not technically necessary, but it would help the perceptron to converge faster.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_shuffle</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="nf">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">).</span><span class="nf">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_shuffle</span><span class="p">[[</span><span class="sh">'</span><span class="s">weight-(gm)</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">wingspan-(cm)</span><span class="sh">'</span><span class="p">]].</span><span class="nf">to_numpy</span><span class="p">()</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_shuffle</span><span class="p">[</span><span class="sh">'</span><span class="s">species</span><span class="sh">'</span><span class="p">].</span><span class="nf">to_numpy</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>We use the fit function, with a learning rate or $\eta$ of 0.01, which means that it would update the weights by 1% of the total error at each time step. We will run 200 iterations of the algorithm. On each iteration, the entire dataset is passed by the algorithm once.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">w</span><span class="p">,</span> <span class="n">errors</span> <span class="o">=</span> <span class="nf">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The perceptron has learned a set of weights to separate the data. Let’s compute the classification accuracy by dividing the number of <em>correct predictions</em> by the <em>expected targets</em>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y_pred</span> <span class="o">=</span> <span class="nf">predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="n">num_correct_predictions</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_pred</span> <span class="o">==</span> <span class="n">y</span><span class="p">).</span><span class="nf">sum</span><span class="p">()</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_correct_predictions</span> <span class="o">/</span> <span class="n">y</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">Perceptron accuracy: %.2f%%</span><span class="sh">'</span> <span class="o">%</span> <span class="n">accuracy</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Perceptron accuracy: 99.50%
+</code></pre></div></div>
+
+<p>After 200 runs, the perceptron has reached 99.5% accuracy, meaning that it is misclassifying a single case at this point. Why not 100% accuracy? If you keep “tweaking” the $\eta$ parameter and running more iterations, the perceptron will eventually find the set of weights to get 100% accuracy. Now, let’s look at the reduction of error over iterations.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">error_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">({</span><span class="sh">'</span><span class="s">error</span><span class="sh">'</span><span class="p">:</span><span class="n">errors</span><span class="p">,</span> <span class="sh">'</span><span class="s">time-step</span><span class="sh">'</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">errors</span><span class="p">))})</span>
+
+<span class="n">alt</span><span class="p">.</span><span class="nc">Chart</span><span class="p">(</span><span class="n">error_df</span><span class="p">).</span><span class="nf">mark_line</span><span class="p">().</span><span class="nf">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="sh">"</span><span class="s">time-step</span><span class="sh">"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="sh">"</span><span class="s">error</span><span class="sh">"</span>
+<span class="p">).</span><span class="nf">properties</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="sh">'</span><span class="s">Chart 2</span><span class="sh">'</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Chart 2</strong></p>
+
+<p><img src="/assets/post-5/chart2.png" width="600" height="YYY" /></p>
+
+<p>As <strong>Chart 2</strong> shows, the more iterations, the lower the error. After around 80 time steps, the error reduction starts to oscillate around the same band instead of going down. This does not mean that the perceptron will not continue learning with more iterations. The behavior of the perceptron, and of neural networks more generally, tends to be a bit unpredictable. The perceptron can “get stuck” for a long period of time until suddenly finds better weights and the error drops. Tweaking the $\eta$ is often necessary to reach absolute convergence. Actually, the $\eta$ parameter is partially responsible for the oscillating behavior of the error at every time step. In general, the smaller the $\eta$, the smaller the oscillation, and vice-versa. Smaller $\eta$ values usually come at the cost of slowing down the learning processes. There are a lot of things to be said about the role of the learning rate in neural net convergence, that I  will not cover at this point to avoid conceptual overloading.</p>
+
+<h2 id="perceptron-limitations-the-linear-separability-constrain">Perceptron limitations: the linear separability constrain</h2>
+
+<h3 id="example-1-the-xor-problem">Example 1: the XOR problem</h3>
+
+<p>As I mentioned previously in this tutorial, the perceptron is guaranteed to find a solution to any classification problem, as long as the problem consist of <em>linearly separable classes</em>. This did not become apparent for Rosenblatt and other researchers at the time, until Minsky and Papert showed, with exquisite detail, the many instances on which the perceptron fails to find a solution. This was not an exercise of cherry-picking difficult problems to test the perceptron and then claim victory. Many of the situations on which the perceptron failed, where almost trivially easy to solve for humans. A famous one is the so-called “XOR” problem. An <em>XOR logic gate</em> (or exclusive OR gate) basically says: when the input patterns are the same, output 1; when they are different, output 0. A visual demonstration of why the perceptron can’t solve that is on <strong>Figure 6</strong></p>
+
+<p><strong>Figure 6</strong></p>
+
+<p><img src="/assets/post-5/XOR-linear.png" width="600" height="YYY" /></p>
+
+<p>The X-axis and Y-axis reflect the combination of binary features in the XOR problem (0 or 1). When X = Y = 0, the output should be 0, when X = 1 and Y = 0, the output should be 1. The dashed orange line represents the <em>decision boundary</em> generated by the perceptron. The red 1s and 0s represent incorrect classifications; the green 1s and 0s represent correct classifications. As we can see, there is <em>no way to generate a decision boundary capable of classifying all the instances correctly</em> (you can keep trying all possible straight lines, and won’t work). The box in the lower right corner shows a case where all instances are correctly classified, but to do that we need two boundaries (or a curvy one) instead of one. There are two possible approaches to tackle this problem: (1) <em>changing the representation of the problem</em>, this is to say, generating some sort of transformation of the inputs into a space that is linearly separable, or (2) using a model that is not restricted to linear decision boundaries, i.e., <em>allowing for non-linearities in the model</em>.</p>
+
+<h3 id="example-2-classifying-albatross-and-condors">Example 2: classifying albatross and condors</h3>
+
+<p>Returning to our previous example, consider the problem of discriminating between the <em>Wandering Albatross</em> and the <em>Andean Condor</em>. Let’s repeat the previous steps to reproduce the Chart and test the perceptron one more time.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">condor_weight_mean</span> <span class="o">=</span> <span class="mi">12000</span> <span class="c1"># in grams
+</span><span class="n">condor_weight_variance</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># in grams
+</span><span class="n">condor_wingspan_mean</span> <span class="o">=</span> <span class="mi">290</span> <span class="c1"># in cm
+</span><span class="n">condor_wingspan_variance</span> <span class="o">=</span> <span class="mi">15</span> <span class="c1"># in cm 
+</span><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">target</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># cX: feature matrix (weight, wingspan)
+# cy: target value (1)
+</span><span class="n">cX</span><span class="p">,</span> <span class="n">cy</span> <span class="o">=</span> <span class="nf">species_generator</span><span class="p">(</span><span class="n">condor_weight_mean</span><span class="p">,</span> <span class="n">condor_weight_variance</span><span class="p">,</span>
+                           <span class="n">condor_wingspan_mean</span><span class="p">,</span> <span class="n">condor_wingspan_variance</span><span class="p">,</span>
+                           <span class="n">n_samples</span><span class="p">,</span><span class="n">target</span><span class="p">,</span><span class="n">seed</span> <span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">condor_dic</span> <span class="o">=</span> <span class="p">{</span><span class="sh">'</span><span class="s">weight-(gm)</span><span class="sh">'</span><span class="p">:</span> <span class="n">cX</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span>
+             <span class="sh">'</span><span class="s">wingspan-(cm)</span><span class="sh">'</span><span class="p">:</span> <span class="n">cX</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> 
+             <span class="sh">'</span><span class="s">species</span><span class="sh">'</span><span class="p">:</span> <span class="n">cy</span><span class="p">,</span>
+             <span class="sh">'</span><span class="s">url</span><span class="sh">'</span><span class="p">:</span> <span class="sh">"</span><span class="s">https://raw.githubusercontent.com/pabloinsente/nn-mod-cog/master/notebooks/images/condor.png</span><span class="sh">"</span><span class="p">}</span>
+
+<span class="c1"># put values in a relational table (pandas dataframe)
+</span><span class="n">condor_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">condor_dic</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df2</span> <span class="o">=</span> <span class="n">albatross_df</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">condor_df</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">alt</span><span class="p">.</span><span class="nc">Chart</span><span class="p">(</span><span class="n">df2</span><span class="p">).</span><span class="nf">mark_image</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">20</span>
+<span class="p">).</span><span class="nf">encode</span><span class="p">(</span>
+    <span class="n">alt</span><span class="p">.</span><span class="nc">X</span><span class="p">(</span><span class="sh">"</span><span class="s">weight-(gm)</span><span class="sh">"</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="p">.</span><span class="nc">Scale</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="p">(</span><span class="mi">6000</span><span class="p">,</span> <span class="mi">16000</span><span class="p">))),</span>
+    <span class="n">alt</span><span class="p">.</span><span class="nc">Y</span><span class="p">(</span><span class="sh">"</span><span class="s">wingspan-(cm)</span><span class="sh">"</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="p">.</span><span class="nc">Scale</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="p">(</span><span class="mi">220</span><span class="p">,</span> <span class="mi">360</span><span class="p">))),</span>
+    <span class="n">url</span><span class="o">=</span><span class="sh">"</span><span class="s">url</span><span class="sh">"</span>
+<span class="p">).</span><span class="nf">properties</span><span class="p">(</span>
+<span class="n">title</span><span class="o">=</span><span class="sh">"</span><span class="s">Chart 3</span><span class="sh">"</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Chart 3</strong></p>
+
+<p><img src="/assets/post-5/chart3.png" width="600" height="YYY" /></p>
+
+<p>From <strong>Chart 3</strong> is clear that there is no way to trace a line to separate albatross from condors based on the available features. Let’s train the perceptron to test performance on this dataset.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_shuffle2</span> <span class="o">=</span> <span class="n">df2</span><span class="p">.</span><span class="nf">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">).</span><span class="nf">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_shuffle2</span><span class="p">[[</span><span class="sh">'</span><span class="s">weight-(gm)</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">wingspan-(cm)</span><span class="sh">'</span><span class="p">]].</span><span class="nf">to_numpy</span><span class="p">()</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_shuffle2</span><span class="p">[</span><span class="sh">'</span><span class="s">species</span><span class="sh">'</span><span class="p">].</span><span class="nf">to_numpy</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">w</span><span class="p">,</span> <span class="n">errors</span> <span class="o">=</span> <span class="nf">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y_pred</span> <span class="o">=</span> <span class="nf">predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="n">num_correct_predictions</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_pred</span> <span class="o">==</span> <span class="n">y</span><span class="p">).</span><span class="nf">sum</span><span class="p">()</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_correct_predictions</span> <span class="o">/</span> <span class="n">y</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">Perceptron accuracy: %.2f%%</span><span class="sh">'</span> <span class="o">%</span> <span class="n">accuracy</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Perceptron accuracy: 91.50%
+</code></pre></div></div>
+
+<p>The perceptron accuracy drops from 99.5% to 91.5%, keeping constant all the steps and parameters, but the values for weight and wingspan (now, the condor ones). Let’s try one more time training for longer and with a smaller learning rate.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">w</span><span class="p">,</span> <span class="n">errors</span> <span class="o">=</span> <span class="nf">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y_pred</span> <span class="o">=</span> <span class="nf">predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="n">num_correct_predictions</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_pred</span> <span class="o">==</span> <span class="n">y</span><span class="p">).</span><span class="nf">sum</span><span class="p">()</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_correct_predictions</span> <span class="o">/</span> <span class="n">y</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">Perceptron accuracy: %.2f%%</span><span class="sh">'</span> <span class="o">%</span> <span class="n">accuracy</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Perceptron accuracy: 92.00%
+</code></pre></div></div>
+
+<p>Although we trained for 1000 time steps and with a smaller learning rate, the accuracy went up only by 0.5% . This is a reflection of the fact that there is no way to classify all instances correctly, and that finding a good decision boundary is harder. This is also reflected in the error curve in <strong>Chart 4</strong>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">error_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">({</span><span class="sh">'</span><span class="s">error</span><span class="sh">'</span><span class="p">:</span><span class="n">errors</span><span class="p">,</span> <span class="sh">'</span><span class="s">time-step</span><span class="sh">'</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">errors</span><span class="p">))})</span>
+<span class="n">alt</span><span class="p">.</span><span class="nc">Chart</span><span class="p">(</span><span class="n">error_df</span><span class="p">).</span><span class="nf">mark_line</span><span class="p">().</span><span class="nf">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="sh">"</span><span class="s">time-step</span><span class="sh">"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="sh">"</span><span class="s">error</span><span class="sh">"</span>
+<span class="p">).</span><span class="nf">properties</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="sh">'</span><span class="s">Chart 4</span><span class="sh">'</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Chart 4</strong></p>
+
+<p><img src="/assets/post-5/chart4.png" width="600" height="YYY" /></p>
+
+<h3 id="perceptron-limitations-summary">Perceptron limitations summary</h3>
+
+<p>The linear separability constrain is for sure the most notable limitation of the perceptron. Yet, there are a couple of additional issues to be mentioned:</p>
+
+<ul>
+  <li>the use of threshold units. Threshold units describe a step-function. If you are familiar with calculus, you may know that the derivative of a step-functions is either 0 or infinity. That characteristic does not allow for the use of derivatives to adjust the weights of the network, that as it was proven later, is a better way to train very large networks than the error-correction perceptron procedure.</li>
+  <li>the use of linear functions to aggregate inputs. Strictly linear function limit the scope of the network to strictly linear decision boundaries. If you remember the XOR problem, a non-linear decision boundary could solve the problem, but such boundary can’t be learned with the perceptron.</li>
+</ul>
+
+<h3 id="why-adding-multiple-layers-of-processing-units-does-not-work">Why adding multiple layers of processing units does not work</h3>
+
+<p>Finally, I want to briefly address a question that you may have asked yourself: “What about stacking multiple layers of perceptrons, maybe that helps with the limitations. We just tried with a single-layer so far!”. The short answer is it does not help.</p>
+
+<p>Imagine you have two linear functions defined as:</p>
+
+\[\psi(x)=wx+b\]
+
+\[\omega(x)=wx+b\]
+
+<p>A perceptron with multiple units equals to <em>compose</em> those functions by nesting $\omega$ inside $\psi$:</p>
+
+\[\omega(\psi(x))=wx+b\]
+
+<p>Now, the output of the composed function is still a linear function. You can repeat this function composition as many times as you want, and the output of the last function will be a linear function again. In essence, this is why we don’t cover this type of composition with perceptrons: a single layer perceptron is as powerful as any multilayer perceptron, no matter how many layers we add.</p>
+
+<h2 id="conclusions">Conclusions</h2>
+
+<p>With the perceptron, Rosenblatt introduced several elements that would prove foundational for the field of neural network models of cognition. Among them, the introduction of an error-correction training algorithm and updatable real-valued weights were arguably the most important. These would open the door to the creation of <em>self-organizing computing systems</em>, able to solve a wide variety of classification problems, instead of ad-hoc and handcrafted architectures as the McCulloch-Pitts model.</p>
+
+<p>The early enthusiasm surrounding the perceptron would fade fast by both the lack of significant progress during the 60s and the famous Minsky and Papert critique. The so-called linear separability constrain was the product of the kind of mathematical objects that Rosenblatt chose for his model: linear functions and step-functions. It is important to remember this because those never were the core of Rosenblatt’s idea, but a technical limitation based on the available knowledge that neural network researchers had at the time. The crux of Rosenblatt’s idea was to design a self-organizing system serving as a <strong><em>model brain and cognitive function</em></strong>. In Rosenblatt own words:</p>
+
+<blockquote>
+  <p>“A perceptron is first and foremost a <strong><em>brain model, not an invention for pattern recognition</em></strong>. As a brain model, its utility is in enabling us to determine the physical conditions for the emergence of various psychological properties. It is by no means a “complete” model, and we are fully aware of the simplifications which have been made from biological systems; but it is, at least, an analyzable model.” (p. viii; bold and italics added by me)</p>
+</blockquote>
+
+<p>This is not to say that the perceptron could not be used as a pattern recognition device, but such capacity was just a byproduct of the fact that the brain has such capacity, and the perceptron is a -very simplified and incomplete- model of brain function. The fact that the perceptron has been analyzed and criticized as a pattern recognition device says more about the ignorance of the critics about Rosenblatt’s original work than about Rosenblatt’s real intentions.</p>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li>Bishop, C. M. (1995). Neural networks for pattern recognition. Oxford university press.</li>
+  <li>Hebb, D. O. (1949). The organization of behavior: A neuropsychological theory. Psychology Press.</li>
+  <li>Rojas, R. (2013). Neural networks: A systematic introduction. Springer Science &amp; Business Media.</li>
+  <li>Rosenblatt, F. (1958). The perceptron: a probabilistic model for information storage and organization in the brain. Psychological review, 65(6), 386.</li>
+  <li>Rosenblatt, F. (1961). Principles of neurodynamics: Perceptrons and the theory of brain mechanisms. Cornell Aeronautical Lab Inc Buffalo NY.</li>
+</ul>
+
+<p><strong>For code implementation:</strong></p>
+
+<p>The perceptron code is partially based on:</p>
+<ul>
+  <li>Raschka, S. (2015). Python machine learning. Packt Publishing Ltd.</li>
+</ul>
+
+
+</article>
+
+      </section>
+    </div>
+  </div>
+
+   <footer>
+  <a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+    <span>
+        <b>Catbug88</b>
+    </span>
+    
+    <span>© 2025</span>
+  </a>
+</footer>
+
+  
+</body>
+
+</html>

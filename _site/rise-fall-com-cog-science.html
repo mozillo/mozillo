@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>The rise, fall, and resurgence of computational cognitive science</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+  
+</head>
+
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/">
+    
+    <h1>catbug88@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <a href="/archive"><h2 class="header-link">Archive</h2></a>
+<a href="/about"><h2 class="header-link">About</h2></a>
+
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        
+
+
+<article>
+	<h2>The rise, fall, and resurgence of computational cognitive science</h2>
+	<time datetime="2020-02-01T00:00:00+08:00" class="by-line"
+		>01 Feb 2020</time
+	>
+	<p>Understanding human cognition has been one of the main driving forces behind over a century of research in psychology. Mathematical approaches in the study of cognition date from as early as the 19th century, when researchers like <a href="https://www.britannica.com/biography/Ernst-Heinrich-Weber">Ernst Heinrich Weber</a> developed mathematical models describing the so-called “just-noticeable difference” effect, the process by which humans can perceive differences between objects (Raymond &amp; Rutherford, 2012). However, it was not until the advent of theoretical computer science and digital computers in the 20th century that <em>computational psychology</em> rose as a field. Amid the creation of the digital computer, cognitive psychologist developed mathematical formalisms and computational models describing cognition as an information processing phenomena, in close resemblance to how digital computers work. Researchers like <a href="https://www.britannica.com/biography/George-A-Miller">George Miller</a>, <a href="https://www.britannica.com/biography/Allen-Newell">Allen Newell</a>, <a href="https://www.britannica.com/biography/Herbert-A-Simon">Herbert Simon</a>, and <a href="https://www.britannica.com/biography/Frank-Rosenblatt">Frank Rosenblatt</a>, applied computational methods to the study of perception, language, and problem-solving, effectively establishing the field with their collective efforts (Boden, 2008a). The rise of computational psychology offered an alternative approach to the study of the mind, one based on algorithms and computer simulations, rather than on correlations and laboratory-based experimentation, the dominant paradigms according to the, at the time, president of the American Psychological Association <a href="https://www.britannica.com/biography/Lee-Cronbach">Lee Cronbach</a> (Cronbach, 1957).</p>
+
+<p>Nowadays, in the first quarter of the 21st century, the field enjoys a fast-paced growth in a world where nations and tech-giants race to discover the keys to human and artificial intelligence. In this introduction, I offer a brief overview of the history of computational approaches in cognitive science, along with a few thoughts about its importance and unique perspective in the study of human thinking and behavior. I take a historical perspective, focusing on articulating a high-level narrative of the evolution of the field, rather than in the many individual examples of computational models. For a more exhaustive review, refer to the excellent work of Boden about the subject (2008a, 2008b).</p>
+
+<h2 id="the-rise">The rise</h2>
+
+<p>Alas, computational cognitive science took a long time to establish itself among the main paradigms in the study of the mind and behavior. During the first half of the 20th century, the study of the mind was considered problematic by many, given our incapacity of directly accessing its contents (Skinner, 196; Watson, 1913). Constructs like “consciousness” or “memory”, are things that researchers can <em>indirectly</em> measure by observing people’s behavior, but there is no way to “touch” and “see” a piece of memory in someone else’s mind. Those are private events, subjective experiences, inaccessible entities of ethereal constitution. True, at the time, we were able to observe and measure patterns of electrical activity in the brain (Haas, 2003), but finding a direct correspondence between such patterns and a particular chunk of memory was ambiguous at best. This is one of the main reasons why the invention of the digital computer was so impactful for cognitive psychologists. It provided a physical exemplar of something that could do many of the things that the human mind does: arithmetic, logic, storage information, and more. After all, you can <em>build</em>, <em>touch</em>, and <em>see</em> a digital computer. You know exactly where a piece of information is processed and saved in memory. It is hard witnessing a digital computer in action and ignore the resemblance to the inner workings of the human mind.</p>
+
+<p>There isn’t an exact date, event, or piece of research signaling the foundation of computational cognitive science as a field. Yet, there are a few works that had a lasting influence on the development of the field worth mentioning. In 1956, Allen Newell and Herbert Simon introduced a computer program that they called “<em>The Logic Theorist</em>” (Newell &amp; Simon, 1956). This program had the remarkable capacity of discovering proofs for theorems in propositional logic, employing <em>heuristics</em> considered to be similar to those observed in human problem-solving. Three years later, in 1959, Newell, Shaw, and Simon introduced a new program called GPS-I for “<em>General Problem Solving I</em>” (Newell et al., 1959). This time, the authors were more explicit about the resemblance to human cognition, as the GPS-I had the explicit intention of helping to “…understand the information processes that underlie human intellectual, adaptive, and creative abilities” (p. 0). These early works are exemplars of the <a href="#"><em>symbolic approach</em></a> to artificial intelligence and cognitive science, approach based on the idea that intelligence is essentially the result of <em>symbol manipulation</em>, as in the Logic Theorist and GPS-I.</p>
+
+<p>Newell, Shaw, and Simon’s work made remarkably progress on emulating human problem-solving skills, by working under the assumption that the human mind operates by manipulating symbols as in logic and mathematics. We can think of this approach as a <em>top-down approach</em> in cognitive science. Form this perspective, the existence of symbolic representations in the mind is taken for granted as a starting point, aiming to explain how such entities operate to generate human thinking and behavior. Contrasting with this line of work, other researchers adopted a perspective that we can qualify as <em>bottom-up</em>. This approach drew inspiration from how the nervous system works: via the collective interplay of complex ensembles of neurons. In 1943, <a href="https://www.britannica.com/biography/Warren-S-McCulloch">Warren McCulloch</a> and <a href="https://www.britannica.com/biography/Walter-Pitts">Walter Pitts</a> published “<em>A logical calculus of the ideas immanent in nervous activity</em>” (McCulloch &amp; Pitts, 1943), introducing what is considered the first computational model of an artificial neuron. Although the McCulloch and Pitts approach were significantly different from the one taken by Newell, Shaw, and Simon, their artificial neuron was able to perform some remarkable feats as well, like emulating the behavior of boolean functions like the AND, OR, and NOR <a href="https://en.wikipedia.org/wiki/Logic_gate">logic gates</a>.</p>
+
+<p>It is important to highlight the McCulloch and Pitts architecture was modeling a <em>single neuron</em>, with multiple binary input values (zeros or ones), and a single binary outcome (zero or one). One of the first and best well-known models utilizing <em>multiple</em> neurons to produce an output is the “<em>Perceptron</em>”, introduced by Frank Rosenblatt in 1958 (Rosenblatt, 1958). One of the main differences between the McCulloch-Pitts’ and Rosenblatt’s architectures, aside from the number of neurons, was that Rosenblatt’s model incorporated a <em>learning algorithm</em>, that allowed the network to adjust its parameters to make better predictions over time. The learning part was of crucial importance for later developments in the field because it enabled the possibility of creating artificial systems able to “discover” solutions instead of forcing humans to figure out the solution beforehand, and then building the solution <em>into</em> the system. This became part of a larger corpus of thinking in cognitive science known as <a href="#"><em>connectionism</em></a>, which in a nutshell, postulates that human intelligence emerges from the coordinated action of billions of neurons in the brain. This may not sound like a particularly bold statement today, but proposing that complex intelligent behavior can emerge <em>entirely</em> from the interplay of <em>non-intelligent</em> processing units wasn’t entirely obvious at the time.</p>
+
+<h2 id="the-fall">The fall</h2>
+
+<p>The works of Newell, Shaw, Simon, McCulloch, Pitts, Rosenblatt, and many others, sparked a great amount of interest in cognitive science and artificial intelligence. Unfortunately, the expectations surrounding the field were too high to be fulfilled. Researchers’ claims did not help to temper expectations either. In 1965, Herbert Simon famously predicted that machines would be able to do what humans can do in 10 years, which as we know today, it never happened. The many limitations of the early symbolic and connectionist approaches to the study of the mind became clear, as researchers unsuccessfully attempted to applied such ideas to problems that were trivially easy to solve for humans, like image recognition or language understanding. In 1969, <a href="#">Marvin Minsky</a> and <a href="#">Seymour Papert</a> famously demonstrated that Rosenblatt’s perceptron wasn’t able to learn simple patterns like the <a href="#">exclusive-or (XOR)</a> rule, which had a devastating effect on the interest on artificial neural networks. The symbolic approach would later receive its fair share of criticism as well. <a href="#">Douglas Hofstadter</a> (1979) would criticize symbolism by its reliance on a “rigid” notion of concepts and categories inherited from mathematical logic, which he argued could not capture the “fluid” nature of how humans use concepts and categories. Researchers in the connectionist tradition (McClelland et al., 1986) would repeatedly point out to the disconnection between symbolic-cognition and how the brain works (parallelism, noisiness, graceful degradation, etc.). The failure of <a href="#">“expert-systems”</a> to deliver technological solutions in the industrial sector would damage the symbolic approach reputation as well. In the artificial intelligence community, these failures and unfulfilled promises would cause a series of “winters”, for both connectionist and symbolic approaches, where research funds and interest in the field faded away. In the great scheme of things, the cognitive psychology community continued to be dominated by the more traditional correlational and lab-based experimentation approaches, relegating the role of computational modeling to the background.</p>
+
+<h2 id="the-resurgence">The resurgence</h2>
+
+<p>In the aftermath of Minsky and Papert’s critique, the enthusiasm surrounding connectionist models of cognition almost completely disappeared. Nonetheless, the lack of enthusiasm did not deter all researchers from pursuing the “connectionist way” of thinking. In particular, a group of researchers led by <a href="#">David Rumelhart</a>, <a href="#">James McClelland</a>, and <a href="#">Geoffrey Hinton</a>, the so-called “<em>Parallel Distributed Processing Research Group</em>” (PDP research group), would work together exploring the implications of neural network models for the understanding of human intelligence (McClelland et al., 1986). Their work would be crystallized in a two volumes book titled “<em>Parallel Distributed Processing: Explorations in the Microstructure of Cognition</em>”. The PDP research group work would help to revitalize the interest in neural network models of cognition in the 80s. In particular, the introduction of today’s well-known “<em>backpropagation</em> <em>algorithm</em>” by Rumelhart, Hinton, and Williams, would be the key to overcome Minsky and Papert’s criticism. In the book, the trio would tackle Minsky and Papert’s challenges one by one, showing how to solve problems like learning the exclusive-or (XOR) rule by combining multiple layers of non-linear processing units, trained with the backpropagation algorithm.</p>
+
+<p>By the late 80s, the future seemed bright for connectionist models. Nonetheless, they would rapidly collide with the limitations of data availability and computational power. It turned out that training large neural networks to learn anything resembling human-level intelligence, required large amounts of data and computation, that were scarce and expensive at the time. Interest in artificial neural networks would diminish again, yet, a few things were different this time: many of the early limitations were overcome; several models tackling language, memory, and perception were introduced as “proof of concepts”; a method to efficiently train large neural networks had been established; and a new generation of researchers had been trained in this line of thought, researchers who would carry on with the connectionist agenda in the following decades.</p>
+
+<p>At this point, it may be useful to pause and ponder the relationship between symbolic and connectionist approaches. In the early 50, the fierce competition and mutual criticism weren’t nearly as heated as it later became. They also were researchers attempting to combine both approaches. For instance, <a href="https://en.wikipedia.org/wiki/Donald_Norman">Donald Norman</a> and <a href="https://en.wikipedia.org/wiki/Tim_Shallice">Tim Shallice</a> (1981) introduced models of attentional control of executive functioning combining symbolic-like planning and connectionist-like pattern recognition. This line of thought has extended until today, whit many researchers attempting to take advantage of the strengths of both approaches (Sun &amp; Alexandre, 2013, Moreno et al., 2019). At present, it is hard to evaluate the role and the future of hybrid approaches, but it is clear that still is an active area of research with many proponents.</p>
+
+<p>As in most things in society, computational cognitive science also has its own “third way”, challenging the dominance of the symbolic and connectionist duality in the field. <a href="#"><em>Probabilistic models of cognition</em></a> describe a formal framework of human reasoning under uncertainty, grounded on probability theory (Chater et al., 2006, Griffiths et al., 2008). Even though Bernoulli and Bayes did theorize about human reasoning, their reflections were largely ignored by the computational cognitive science community until the late 80s and early 90s. The works of <a href="https://en.wikipedia.org/wiki/Roger_Shepard">Roger Shepard</a> on generalization theory (1987), <a href="#">Judea Pearl</a> on belief networks and causality (1988), and <a href="#">Ulf Grenander</a> on pattern theory (1993), were foundational for the probabilistic perspective. Why probabilistic models took so long to break into the field it is unclear. According to Chater, Tenenbaum, and Yuille (Chater et al., 2006), there are at least three major reasons: the historical focus on architectures over content within those architectures; formal approaches to reason under uncertainty has been historically studied using non-probabilistic approaches, grounded in logic or heuristics; and finally, probabilistic methods have been perceived as too restricted in scope compared to linguistic description, logical representations, and neural network architectures. Although not mentioned by Chater and colleagues, probabilistic modeling entails a fair amount of mathematical formalism and computational resources to be implemented, things that most cognitive scientists did not have access to, either by lack of training or resources. Regardless of the reason for the late arrival, the fact is that the probabilistic perspective was established during the early 90s, grew in popularity over the next few decades, and today has become one the major focus of attention in computational cognitive science.</p>
+
+<p>In the early 21st century, the availability of computational resources and data has exploded. Researchers in cognitive science and artificial intelligence have greatly benefited from this explosion. One of the best well-known examples of the impact of data and computational availability in the field is “<em>The ImageNet Large Scale Visual Recognition Challenge</em>” (ILSVRC; Deng et al., 2009). Since 2010, the ImageNet project runs a large scale competition on object recognition and image classification, where researchers from all over the world compete to produce models as accurate as possible. By 2011, solutions based on models fed with carefully crafted image features were achieving top-5 error rates (i.e., classifications where the correct label was among the 5 most likely answers produced by the model) of ~25%. The surprise came in 2012, when <a href="#">Alex Krizhevsky</a>, <a href="#">Ilya Sutskever</a>, and Geoffrey Hinton (2012), introduced a convolutional neural network model with a top-5 error rate of ~17%. An 8% reduction in the error rate may not sound very impressive, but keep in mind that the field had struggled during decades to reduce the error rate, often with little success. The impact Krizhevsky, Sutskever, and Hinton’s were enormous, effectively reviving the interest in artificial neural networks, in both the artificial intelligence and cognitive science communities.</p>
+
+<p>How does the computational cognitive science field look today? The truth is that the correlational and lab-based experimental approaches still dominate cognitive psychology as a whole, at least by the numbers. However, it is fair to say that in the last couple of years psychology has witnessed an increasing presence interest in computational models. More articles are published every year at major journals and conferences, and more students are being trained in computational methods than ever before. Cognitive scientists still debate about the merits of connectionist and symbolic approaches, but the landscape seems to be more open, with probabilistic and hybrid approaches joining the conversation. It is also fair to say that the prominence of deep learning in artificial intelligence, has greatly contributed to the cause of connectionism, placing this approach as the center of attention, and making it the one producing the highest volume of research. Yet, as history demonstrates, scientists have been remarkably bad at predicting the future of the field, repeatedly overlooking its limitations and miscalculating its potential.</p>
+
+<h2 id="references">References</h2>
+
+<p>Boden, M. A. (2008a). <em>Mind as Machine: A History of Cognitive Science</em>. Clarendon Press.</p>
+
+<p>Boden, M. A. (2008b). An Evaluation of Computational Modeling in Cognitive Science. In <em>The Cambridge Handbook of Computational Psychology</em> (pp. 667–683). Cambridge University Press.</p>
+
+<p>Chater, N., Tenenbaum, J. B., &amp; Yuille, A. (2006). Probabilistic models of cognition: Conceptual foundations. <em>Trends in Cognitive Sciences</em>, <em>10</em>(7), 287–291. https://doi.org/10.1016/j.tics.2006.05.007</p>
+
+<p>Cronbach, L. J. (1957). The two disciplines of scientific psychology. <em>American Psychologist</em>, <em>12</em>(11), 671.</p>
+
+<p>Deng, J., Dong, W., Socher, R., Li, L.-J., Li, K., &amp; Fei-Fei, L. (2009). <em>Imagenet: A large-scale hierarchical image database</em>. 248–255.</p>
+
+<p>Grenander, U. (1993). <em>General pattern theory: A mathematical study of regular structures Oxford mathematical monographs</em>. Oxford University Press: Clarendon.</p>
+
+<p>Griffiths, T., Kemp, C., &amp; B Tenenbaum, J. (2008). <em>Bayesian models of cognition</em>.</p>
+
+<p>Haas, L. F. (2003). Hans berger (1873–1941), Richard Caton (1842–1926), and electroencephalography. <em>Journal of Neurology, Neurosurgery &amp; Psychiatry</em>, <em>74</em>(1), 9–9.</p>
+
+<p>Krizhevsky, A., Sutskever, I., &amp; Hinton, G. E. (2012). <em>Imagenet classification with deep convolutional neural networks</em>. 1097–1105.</p>
+
+<p>McCulloch, W. S., &amp; Pitts, W. (1943). A logical calculus of the ideas immanent in nervous activity. <em>The Bulletin of Mathematical Biophysics</em>, <em>5</em>(4), 115–133.</p>
+
+<p>McClelland, J. L., Rumelhart, D. E., &amp; PDP Research Group. (1986). Parallel distributed processing. <em>Explorations in the Microstructure of Cognition</em>, <em>2</em>, 216–271.</p>
+
+<p>Moreno, M., Civitarese, D., Brandao, R., &amp; Cerqueira, R. (2019). Effective Integration of Symbolic and Connectionist Approaches through a Hybrid Representation. <em>ArXiv Preprint ArXiv:1912.08740</em>.</p>
+
+<p>Newell, A., &amp; Simon, H. (1956). The logic theory machine—A complex information processing system. <em>IRE Transactions on Information Theory</em>, <em>2</em>(3), 61–79.</p>
+
+<p>Newell, A., Shaw, J. C., &amp; Simon, H. A. (1959). <em>Report on a general problem solving program</em>. <em>256</em>, 64.</p>
+
+<p>Lansman, M., &amp; Hunt, E. (1981). <em>Proceedings of the Lake Wilderness Attention Conference. Interim Technical Report, August 1, 1980 through September 30, 1980.</em></p>
+
+<p>Pearl, J. (1988). <em>Probabilistic reasoning in intelligent systems: Networks of plausible inference</em>. Morgan-Kaufman.</p>
+
+<p>Raymond, F., &amp; Rutherford, A. (2012). The Sensing and Perceiving Mind. In <em>Pioneers of Psychology: A History</em> (Fourth ed). Norton.</p>
+
+<p>Rosenblatt, F. (1958). The perceptron: A probabilistic model for information storage and organization in the brain. <em>Psychological Review</em>, <em>65</em>(6), 386–408. https://doi.org/10.1037/h0042519</p>
+
+<p>Shepard, R. N. (1987). Toward a universal law of generalization for psychological science. <em>Science</em>, <em>237</em>(4820), 1317–1323.</p>
+
+<p>Skinner, B. F. (1965). <em>Science and human behavior</em>. Simon and Schuster.</p>
+
+<p>Sun, R., &amp; Alexandre, F. (2013). <em>Connectionist-symbolic integration: From unified to hybrid approaches</em>. Psychology Press.</p>
+
+<p>Watson, J. B. (1913). Psychology as the behaviorist views it. <em>Psychological Review</em>, <em>20</em>(2), 158.</p>
+
+</article>
+
+      </section>
+    </div>
+  </div>
+
+   <footer>
+  <a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+    <span>
+        <b>Catbug88</b>
+    </span>
+    
+    <span>© 2025</span>
+  </a>
+</footer>
+
+  
+</body>
+
+</html>
