@@ -1,9 +1,9 @@
-title: Catbug88's Blog
+title: Mozillo Blog
 description: "A blog about cognitive science, machine learning, and data science"
 author:
-  name: "Catbug88"
-  email: "pablo.caceres.maldonado@gmail.com"
-  url: "http://pabloinsente.github.io/"
+  name: "mozillo"
+  email: "motwu412@gmail.com"
+  url: "http://mozillo.github.io/"
 
 baseurl: /
 
@@ -27,5 +27,5 @@ plugins:
   - jekyll-sitemap
 
 # Custom variables
-owner: "Catbug88"
-year: "2020"
+owner: "mozillo"
+year: "2025"
