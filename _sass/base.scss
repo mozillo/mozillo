@@ -1,8 +1,8 @@
 /*
    original: https://github.com/pages-themes/hacker 
 */
-@import "_default_colors";
-@import "rouge-base16-dark";
+@forward "_default_colors";
+@forward "rouge-base16-dark";
 
 $body-background: $cod-grey !default;
 $body-foreground: $gallery !default;

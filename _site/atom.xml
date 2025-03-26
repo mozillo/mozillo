@@ -3,8 +3,8 @@
   <channel>
     <title>Mozillo Blog</title>
     <description>A blog about cognitive science, machine learning, and data science</description>
-    <link>http://localhost:4000</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <link></link>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     <author>
       <name>mozillo</name>
       <email>motwu412@gmail.com</email>
@@ -66,9 +66,9 @@ textarea { width: 90%;  resize: none; }
 &lt;/form&gt;
 </description>
         <pubDate>Sat, 01 Aug 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000//postdocs-ds</link>
-        <link href="http://localhost:4000/postdocs-ds"/>
-        <guid isPermaLink="true">http://localhost:4000/postdocs-ds</guid>
+        <link>//postdocs-ds</link>
+        <link href="/postdocs-ds"/>
+        <guid isPermaLink="true">/postdocs-ds</guid>
       </item>
     
       <item>
@@ -3864,9 +3864,9 @@ Find strings with at least one white space: [False False False False False False
 
 </description>
         <pubDate>Tue, 14 Jul 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000//intro-numpy-fundamentals</link>
-        <link href="http://localhost:4000/intro-numpy-fundamentals"/>
-        <guid isPermaLink="true">http://localhost:4000/intro-numpy-fundamentals</guid>
+        <link>//intro-numpy-fundamentals</link>
+        <link href="/intro-numpy-fundamentals"/>
+        <guid isPermaLink="true">/intro-numpy-fundamentals</guid>
       </item>
     
       <item>
@@ -4043,9 +4043,9 @@ Take applied fields like engineering and medicine. They exist in a duality: they
 &lt;p&gt;My roots, trunk, and branches lists are by no means complete or exhaustive, but I hope are enough to convey my main points: &lt;strong&gt;Data Science, as a discipline, does require a sensible core of knowledge to define itself as a discipline, and to envision a clear learning path for people who aspire to become a Data Scientist&lt;/strong&gt;.&lt;/p&gt;
 </description>
         <pubDate>Tue, 07 Jul 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000//ds-tree-knowledge</link>
-        <link href="http://localhost:4000/ds-tree-knowledge"/>
-        <guid isPermaLink="true">http://localhost:4000/ds-tree-knowledge</guid>
+        <link>//ds-tree-knowledge</link>
+        <link href="/ds-tree-knowledge"/>
+        <guid isPermaLink="true">/ds-tree-knowledge</guid>
       </item>
     
       <item>
@@ -4080,9 +4080,9 @@ Take applied fields like engineering and medicine. They exist in a duality: they
 &lt;p&gt;So, what is my revenge all about? &lt;strong&gt;I am revenging from all the people who made me doubt myself, of my skill, my intelligence, and my capacity to learn anything, particularly math and science-related subjects&lt;/strong&gt;. My brain was not missing any “math module” or “special math instinct”. I was just systematically forced out of the topic by people who were too ignorant, too lazy, too unskilled, or too unkind to guide me in the right direction and provide the right support. I like to think that by creating content from the perspective of someone who was told that these topics were beyond its skill and intelligence, can help others in similar positions to regain their confidence and learn what they thought was not possible.&lt;/p&gt;
 </description>
         <pubDate>Thu, 02 Jul 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000//why-ds-content</link>
-        <link href="http://localhost:4000/why-ds-content"/>
-        <guid isPermaLink="true">http://localhost:4000/why-ds-content</guid>
+        <link>//why-ds-content</link>
+        <link href="/why-ds-content"/>
+        <guid isPermaLink="true">/why-ds-content</guid>
       </item>
     
       <item>
@@ -4945,9 +4945,9 @@ Plum
 &lt;p&gt;&lt;a href=&quot;#table-of-contents&quot;&gt;back to the top&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 18 Jun 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000//intro-unix-shell</link>
-        <link href="http://localhost:4000/intro-unix-shell"/>
-        <guid isPermaLink="true">http://localhost:4000/intro-unix-shell</guid>
+        <link>//intro-unix-shell</link>
+        <link href="/intro-unix-shell"/>
+        <guid isPermaLink="true">/intro-unix-shell</guid>
       </item>
     
       <item>
@@ -5543,9 +5543,9 @@ interpreter: 64bit
 &lt;/ul&gt;
 </description>
         <pubDate>Fri, 12 Jun 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000//intro-jupyter-ide</link>
-        <link href="http://localhost:4000/intro-jupyter-ide"/>
-        <guid isPermaLink="true">http://localhost:4000/intro-jupyter-ide</guid>
+        <link>//intro-jupyter-ide</link>
+        <link href="/intro-jupyter-ide"/>
+        <guid isPermaLink="true">/intro-jupyter-ide</guid>
       </item>
     
       <item>
@@ -11046,9 +11046,9 @@ SVD approximation with 10 component:
 &lt;p&gt;Linear algebra is an enormous and fascinating subject. These notes are just an introduction to the subject with machine learning in mind. I am no mathematician, and I have no formal mathematical training, yet, I greatly enjoyed writing this document. I have learned quite a lot by doing it and I hope it may help others that, like me, embark on the journey of acquiring a new skill by themselves, even when such effort may seem crazy to others.&lt;/p&gt;
 </description>
         <pubDate>Tue, 26 May 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000//intro-linear-algebra</link>
-        <link href="http://localhost:4000/intro-linear-algebra"/>
-        <guid isPermaLink="true">http://localhost:4000/intro-linear-algebra</guid>
+        <link>//intro-linear-algebra</link>
+        <link href="/intro-linear-algebra"/>
+        <guid isPermaLink="true">/intro-linear-algebra</guid>
       </item>
     
       <item>
@@ -11312,9 +11312,9 @@ R2 coefficient of determination multivariable regression: 0.59
 &lt;/ul&gt;
 </description>
         <pubDate>Sat, 25 Apr 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000//intro-linear-regression</link>
-        <link href="http://localhost:4000/intro-linear-regression"/>
-        <guid isPermaLink="true">http://localhost:4000/intro-linear-regression</guid>
+        <link>//intro-linear-regression</link>
+        <link href="/intro-linear-regression"/>
+        <guid isPermaLink="true">/intro-linear-regression</guid>
       </item>
     
       <item>
@@ -12296,9 +12296,9 @@ Test accuracy score:0.8098000288009644
 &lt;/ul&gt;
 </description>
         <pubDate>Thu, 16 Apr 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000//the-recurrent-net</link>
-        <link href="http://localhost:4000/the-recurrent-net"/>
-        <guid isPermaLink="true">http://localhost:4000/the-recurrent-net</guid>
+        <link>//the-recurrent-net</link>
+        <link href="/the-recurrent-net"/>
+        <guid isPermaLink="true">/the-recurrent-net</guid>
       </item>
     
       <item>
@@ -13825,9 +13825,9 @@ Test accuracy score:0.5548999905586243
 &lt;/ul&gt;
 </description>
         <pubDate>Thu, 02 Apr 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000//the-convolutional-network</link>
-        <link href="http://localhost:4000/the-convolutional-network"/>
-        <guid isPermaLink="true">http://localhost:4000/the-convolutional-network</guid>
+        <link>//the-convolutional-network</link>
+        <link href="/the-convolutional-network"/>
+        <guid isPermaLink="true">/the-convolutional-network</guid>
       </item>
     
   </channel>

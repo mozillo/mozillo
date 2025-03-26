@@ -9,8 +9,8 @@
 		<description>A blog about cognitive science, machine learning, and data science</description>		
 		<sy:updatePeriod>daily</sy:updatePeriod>
 		<sy:updateFrequency>1</sy:updateFrequency>
-		<link>http://localhost:4000</link>
-		<atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+		<link></link>
+		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		<lastBuildDate>Sat, 01 Aug 2020 00:00:00 +0800</lastBuildDate>
 		
 		
@@ -22,8 +22,8 @@
 </description>
 				
 				<pubDate>Sat, 01 Aug 2020 00:00:00 +0800</pubDate>
-				<link>http://localhost:4000/postdocs-ds</link>
-				<guid isPermaLink="true">http://localhost:4000/postdocs-ds</guid>
+				<link>/postdocs-ds</link>
+				<guid isPermaLink="true">/postdocs-ds</guid>
 			</item>
 		
 			<item>
@@ -34,8 +34,8 @@
 </description>
 				
 				<pubDate>Tue, 14 Jul 2020 00:00:00 +0800</pubDate>
-				<link>http://localhost:4000/intro-numpy-fundamentals</link>
-				<guid isPermaLink="true">http://localhost:4000/intro-numpy-fundamentals</guid>
+				<link>/intro-numpy-fundamentals</link>
+				<guid isPermaLink="true">/intro-numpy-fundamentals</guid>
 			</item>
 		
 			<item>
@@ -46,8 +46,8 @@
 </description>
 				
 				<pubDate>Tue, 07 Jul 2020 00:00:00 +0800</pubDate>
-				<link>http://localhost:4000/ds-tree-knowledge</link>
-				<guid isPermaLink="true">http://localhost:4000/ds-tree-knowledge</guid>
+				<link>/ds-tree-knowledge</link>
+				<guid isPermaLink="true">/ds-tree-knowledge</guid>
 			</item>
 		
 			<item>
@@ -58,8 +58,8 @@
 </description>
 				
 				<pubDate>Thu, 02 Jul 2020 00:00:00 +0800</pubDate>
-				<link>http://localhost:4000/why-ds-content</link>
-				<guid isPermaLink="true">http://localhost:4000/why-ds-content</guid>
+				<link>/why-ds-content</link>
+				<guid isPermaLink="true">/why-ds-content</guid>
 			</item>
 		
 			<item>
@@ -70,8 +70,8 @@
 </description>
 				
 				<pubDate>Thu, 18 Jun 2020 00:00:00 +0800</pubDate>
-				<link>http://localhost:4000/intro-unix-shell</link>
-				<guid isPermaLink="true">http://localhost:4000/intro-unix-shell</guid>
+				<link>/intro-unix-shell</link>
+				<guid isPermaLink="true">/intro-unix-shell</guid>
 			</item>
 		
 			<item>
@@ -82,8 +82,8 @@
 </description>
 				
 				<pubDate>Fri, 12 Jun 2020 00:00:00 +0800</pubDate>
-				<link>http://localhost:4000/intro-jupyter-ide</link>
-				<guid isPermaLink="true">http://localhost:4000/intro-jupyter-ide</guid>
+				<link>/intro-jupyter-ide</link>
+				<guid isPermaLink="true">/intro-jupyter-ide</guid>
 			</item>
 		
 			<item>
@@ -94,8 +94,8 @@
 </description>
 				
 				<pubDate>Tue, 26 May 2020 00:00:00 +0800</pubDate>
-				<link>http://localhost:4000/intro-linear-algebra</link>
-				<guid isPermaLink="true">http://localhost:4000/intro-linear-algebra</guid>
+				<link>/intro-linear-algebra</link>
+				<guid isPermaLink="true">/intro-linear-algebra</guid>
 			</item>
 		
 			<item>
@@ -106,8 +106,8 @@
 </description>
 				
 				<pubDate>Sat, 25 Apr 2020 00:00:00 +0800</pubDate>
-				<link>http://localhost:4000/intro-linear-regression</link>
-				<guid isPermaLink="true">http://localhost:4000/intro-linear-regression</guid>
+				<link>/intro-linear-regression</link>
+				<guid isPermaLink="true">/intro-linear-regression</guid>
 			</item>
 		
 			<item>
@@ -118,8 +118,8 @@
 </description>
 				
 				<pubDate>Thu, 16 Apr 2020 00:00:00 +0800</pubDate>
-				<link>http://localhost:4000/the-recurrent-net</link>
-				<guid isPermaLink="true">http://localhost:4000/the-recurrent-net</guid>
+				<link>/the-recurrent-net</link>
+				<guid isPermaLink="true">/the-recurrent-net</guid>
 			</item>
 		
 			<item>
@@ -130,8 +130,8 @@
 </description>
 				
 				<pubDate>Thu, 02 Apr 2020 00:00:00 +0800</pubDate>
-				<link>http://localhost:4000/the-convolutional-network</link>
-				<guid isPermaLink="true">http://localhost:4000/the-convolutional-network</guid>
+				<link>/the-convolutional-network</link>
+				<guid isPermaLink="true">/the-convolutional-network</guid>
 			</item>
 		
 	</channel>
